@@ -1,0 +1,22 @@
+{
+  "name": "nicolascandeli_7_23112021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:.public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NC81/NicolasCandeli_7_23112021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NC81/NicolasCandeli_7_23112021/issues"
+  },
+  "homepage": "https://github.com/NC81/NicolasCandeli_7_23112021#readme",
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  }
+}

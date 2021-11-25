@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <!-- Meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- Titre -->
+        <title>Les petits plats - Trouvez votre recette de cuisine !</title>
+        <!-- Style CSS -->
+        <link rel="stylesheet" href=".public/css/style.css" />
+        <!-- Police et icones -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    </head>
+
+    <body>
+        <div class="bloc-page">
+            <!-- En-tête -->
+            <header class="header">
+                <svg role="img" aria-describedby="titre" width="52" height="47" viewBox="0 0 52 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <title id="titre">Le logo de "Les petits plats"</title>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M39.5083 25.3424V35.1415H12.4024V25.3424C7.99768 25.3424 4.60945 21.9635 4.60945 17.5708C4.60945 13.1781 7.99768 9.79908 12.4024 9.79908C15.4518 9.79908 18.1624 11.4886 19.5177 14.1918L22.9059 12.5023C21.8895 10.8128 20.873 9.12328 19.1789 8.10958C20.5342 5.74429 22.9059 4.05479 25.9553 4.05479C30.36 4.05479 33.7483 7.43378 33.7483 11.8265C33.7483 13.1781 33.4095 14.5297 32.7318 15.8813L36.12 17.9087C37.1365 16.2192 37.8142 14.1918 37.8142 11.8265C37.8142 11.1507 37.8142 10.8128 37.8142 10.137C38.4918 9.79908 39.1695 9.79908 39.8471 9.79908C44.2518 9.79908 47.64 13.1781 47.64 17.5708C47.64 21.9635 43.913 25.3424 39.5083 25.3424ZM39.5083 42.9132H12.4024V39.1963H39.5083V42.9132ZM39.5083 6.08219C38.4918 6.08219 37.4753 6.42009 36.12 6.42009C34.0871 2.70319 30.36 0 25.9553 0C21.5506 0 17.4847 2.36529 15.7906 6.42009C14.7742 6.08219 13.7577 6.08219 12.4024 6.08219C5.96474 6.08219 0.882385 11.1507 0.882385 17.5708C0.882385 22.6393 4.27062 27.0319 8.67533 28.3835V46.2922H43.5742V28.7214C47.9789 27.0319 51.3671 22.9772 51.3671 17.9087C51.3671 11.4886 45.9459 6.08219 39.5083 6.08219ZM22.2283 31.0867H18.5012V23.653H22.2283V31.0867ZM33.7483 31.0867H30.0212V23.653H33.7483V31.0867Z" fill="#D04F4F"/>
+                </svg>
+                <h1>Les petits plats</h1>
+                <!-- Barre de recherche principale -->
+                <form class="form-princ">
+                    <label for="rech-princ">
+                        <span class="fas fa-search fa-2x"></span>
+                    </label>
+                    <input type="search" id="rech-princ" name="rech-princ" placeholder="Rechercher un ingrédient, appareil, ustenciles ou une recette" />
+                </form>
+                <!-- Navigation -->
+                <nav>
+                    <!-- Bouton comportant la recherche en cours -->
+                    <div>
+                        <button class="btn-mini">
+                            <span class="btn-mini__cont">Coco</span>
+                            <span class="far fa-times-circle"></span>
+                        </button>
+                    </div>
+                    <!-- Boutons ouvrant les formulaires de recherche par catégorie -->
+                    <div class="header__categ">
+                        <button class="btn btn--ingr" aria-label="Rechercher un ingrédient" aria-haspopup="menu" aria-controls="form-ingr" aria-expanded="false">
+                            <span class="btn__cont">Ingrédients</span>
+                            <span class="fas fa-chevron-down"></span>
+                        </button>
+                        <form id="form-ingr" class="form-categ form-categ--ingr">
+                            <label for="rech-ingr"><span class="fas fa-chevron-up"></span></label>
+                            <input type="search" id="rech-ingr" name="rech-ingr" placeholder="Recherche un ingrédient" />
+                            <ul aria-label="Liste des ingrédients" class="form-categ__liste form-categ--ingr__liste">
+                            </ul>
+                        </form>
+                        <button class="btn btn--appa" aria-label="Rechercher un appareil" aria-haspopup="menu" aria-controls="form-appa" aria-expanded="false">
+                            <span class="btn__cont">Appareil</span>
+                            <span class="fas fa-chevron-down"></span>
+                        </button>
+                        <form id="form-appa" class="form-categ form-categ--appa">
+                            <label for="rech-appa"><span class="fas fa-chevron-up"></span></label>
+                            <input type="search" id="rech-appa" name="rech-appa" placeholder="Recherche un appareil" />
+                            <ul aria-label="Liste des appareils" class="form-categ__liste form-categ--ingr__liste">
+                            </ul>
+                        </form>
+                        <button class="btn btn--uste" aria-label="Rechercher un ustencile" aria-haspopup="menu" aria-controls="form-uste" aria-expanded="false">
+                            <span class="btn__cont">Ustenciles</span>
+                            <span class="fas fa-chevron-down"></span>
+                        </button>
+                        <form id="form-uste" class="form-categ form-categ--uste">
+                            <label for="rech-uste"><span class="fas fa-chevron-up"></span></label>
+                            <input type="search" id="rech-uste" name="rech-uste" placeholder="Recherche un ustencile" />
+                            <ul aria-label="Liste des ustenciles" class="form-categ__liste form-categ--ingr__liste">
+                            </ul>
+                        </form>
+                    </div>
+                </nav>
+            </header>
+            <!-- Galerie de plats -->
+            <main class="galerie">
+                <article class="plat">
+                    <img src="https://via.placeholder.com/150/C7BEBE?text=+" alt="" />
+                    <div class="plat-intro">
+                        <h2>Limonade de Coco</h2>
+                        <div>
+                            <span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">10 min</span>
+                        </div>
+                    </div>
+                    <div class="plat-recette">
+                        <ul class="plat-recette__liste">
+                            <li><span class="plat-recette__ingr">Lait de coco: </span><span class="plat-recette__quant">400ml</span></li>
+                            <li><span class="plat-recette__ingr">Jus de citron: </span><span class="plat-recette__quant">2</span></li>
+                            <li><span class="plat-recette__ingr">Crême de coco: </span><span class="plat-recette__quant">4 cuillères</span></li>
+                            <li><span class="plat-recette__ingr">Sucre: </span><span class="plat-recette__quant">20g</span></li>
+                            <li><span class="plat-recette__ingr">Glaçons: </span><span class="plat-recette__quant">2</span></li>
+                        </ul>
+                        <p class="plat-recette__descr">
+                            Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
+                        </p>
+                    </div>
+                </article>
+
+            </main>
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    </body>
+
+</html>

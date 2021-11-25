@@ -1,0 +1,87 @@
+// Barre de recherche principale
+.form-princ {
+    position: relative;
+  label {
+    display: inline;
+  }
+  input {
+    padding: 23px 16px 24px 22px;
+    width: 100%;
+    height: 69px;
+    font-size: 1.125em;
+    border-radius: 5px;
+    background-color: $clr-sec;
+    border: none;
+    &::placeholder {
+      color: black;
+      opacity: .25;
+    }
+  }
+  .fa-search {
+    position: absolute;
+    line-height: 69px;
+    right: 17px;
+  }
+}
+
+// Barres de recherche par catégorie
+.form-categ {
+  // display: inline-block;
+  display: none;
+  position: absolute;
+  top: 15px;
+  width: 667px;
+  font-size: 1.125em;
+  color: white;
+  border-radius: 5px;
+  padding: 0 19px 10px 19px;
+  label {
+    position: absolute;
+    right: 28px;
+    line-height: 69px;
+  }
+  input {
+    width: calc(100% - 50px);
+    height: 69px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    &::placeholder {
+      color: white;
+      font-weight: bold;
+      opacity: .5;
+    }
+  }
+  &__liste {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5%;
+    li {
+      text-align: left;
+      width: 23%;
+      line-height: 31.8px;
+    }
+  }
+  &--ingr {
+    background-color: $clr-btn1;
+    left: 0;
+    input {
+      background-color: $clr-btn1;
+    }
+  }
+  &--appa {
+    background-color: $clr-btn2;
+    left: 193px;
+    input {
+      background-color: $clr-btn2;
+    }
+  }
+  &--uste {
+    background-color: $clr-btn3;
+    left: 387px;
+    input {
+      background-color: $clr-btn3;
+    }
+  }
+}

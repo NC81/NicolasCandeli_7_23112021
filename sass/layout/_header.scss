@@ -1,0 +1,16 @@
+.header {
+  margin-top: 42px;
+  text-align: center;
+  h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2.25em;
+    color: $clr-pri;
+    margin-bottom: 17px;
+  }
+  nav {
+  text-align: left;
+  }
+  &__categ {
+    position: relative;
+  }
+}

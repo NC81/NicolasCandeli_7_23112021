@@ -1,0 +1,48 @@
+.btn {
+  position: relative;
+  width: 170px;
+  height: 69px;
+  border: none;
+  color: white;
+  font-size: 1.125em;
+  margin: 15px 20px 0 0;
+  padding-left: 20px;
+  text-align: left;
+  &__cont {
+    font-weight: 700;
+  }
+  &--ingr {
+    background-color: $clr-btn1;
+  }
+  &--appa {
+    background-color: $clr-btn2;
+  }
+  &--uste {
+    background-color: $clr-btn3;
+  }
+  .fa-chevron-down {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    line-height: 69px;
+  }
+}
+
+.btn-mini {
+  position: relative;
+  height: 37px;
+  font-size: 0.875em;
+  color: white;
+  background-color: $clr-btn1;
+  border: none;
+  padding: 0 55px 0 20px;
+  margin-top: 25px;
+  &__cont {
+      font-weight: 700;
+  }
+  .fa-times-circle {
+    position: absolute;
+    font-size: 20px;
+    right: 22px;
+  }
+}
