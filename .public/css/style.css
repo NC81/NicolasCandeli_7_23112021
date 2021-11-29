@@ -93,6 +93,7 @@ button {
   color: white;
   border-radius: 5px;
   padding: 0 19px 10px 19px;
+  z-index: 1;
 }
 .form-categ label {
   position: absolute;
@@ -118,6 +119,9 @@ button {
   gap: 5%;
 }
 .form-categ__liste li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: left;
   width: 23%;
   line-height: 31.8px;

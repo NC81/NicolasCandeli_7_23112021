@@ -35,6 +35,7 @@
   color: white;
   border-radius: 5px;
   padding: 0 19px 10px 19px;
+  z-index: 1;
   label {
     position: absolute;
     right: 28px;
@@ -58,6 +59,9 @@
     flex-wrap: wrap;
     gap: 5%;
     li {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       text-align: left;
       width: 23%;
       line-height: 31.8px;
