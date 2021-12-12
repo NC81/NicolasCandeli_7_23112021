@@ -8,13 +8,13 @@
         <!-- Titre -->
         <title>Les petits plats - Trouvez votre recette de cuisine !</title>
         <!-- Style CSS -->
-        <link rel="stylesheet" href=".public/css/style.css" />
+        <link rel="stylesheet" href="./public/css/style.css" />
         <!-- Police et icones -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-        <script type="module" src="global.js"></script>
+        <script type="module" src="js/global.js"></script>
     </head>
 
     <body>
@@ -37,12 +37,7 @@
                 <!-- Navigation -->
                 <nav>
                     <!-- Bouton comportant la recherche en cours -->
-                    <div>
-                        <button class="btn-mini">
-                            <span class="btn-mini__cont">Coco</span>
-                            <span class="far fa-times-circle"></span>
-                        </button>
-                    </div>
+                    <div class="header__selec"></div>
                     <!-- Boutons ouvrant les formulaires de recherche par catégorie -->
                     <div class="header__categ">
                         <button class="btn btn--ingr" aria-label="Rechercher un ingrédient" aria-haspopup="menu" aria-controls="form-ingr" aria-expanded="false">
@@ -81,6 +76,10 @@
 
             <!-- Galerie de plats -->
             <main class="galerie">
+                <!-- <aside class="galerie__mess">
+                    <span>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>
+                    <span class="far fa-times-circle"></span>
+                </aside> -->
                 <!-- <article class="plat">
                     <img src="https://via.placeholder.com/150/C7BEBE?text=+" alt="" />
                     <div class="plat-intro">
