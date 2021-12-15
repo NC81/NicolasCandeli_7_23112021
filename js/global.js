@@ -3,9 +3,9 @@ import { rechercheParMotsCles } from './rech-sec.js';
 
 let recherche = () => {
   recherchePrincipale.filtreRecettes();
+  rechercheParMotsCles.ouvreTousLesTypesDeChamps();
   rechercheParMotsCles.afficheTousLesTypesDeMotCle();
   rechercheParMotsCles.selectionneTousLesTypesDeMotClé();
-  rechercheParMotsCles.ouvreTousLesTypesDeChamps();
 
   barrePrincipale.addEventListener('input', () => {
     recherchePrincipale.filtreRecettes();
