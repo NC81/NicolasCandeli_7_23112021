@@ -23,13 +23,12 @@ let recettesFiltreesParMotsCles;
 
 // Classe de recherche par mots clés
 class RechercheParMotsCles {
-  constructor(bouton, label, formulaire, champs, liste, tableau) {
+  constructor(bouton, label, formulaire, champs, liste) {
     this.bouton = bouton, /* Bouton d'ouverture */
     this.label = label, /* Label de fermeture */
     this.formulaire = formulaire, 
     this.champs = champs,
-    this.liste = liste, /* Liste contenant les <li> à remplir */
-    this.tableau = tableau /* Tableau contenant les valeurs à inscrire dans les <li> */
+    this.liste = liste /* Liste (DOM) contenant les <li> à remplir */
   }
 
   // Contrôle l'ouverture et la fermeture des champs de recherche
@@ -58,7 +57,7 @@ class RechercheParMotsCles {
 
     // Évènement d'ajout de mots clés
     this.liste.addEventListener('click', (evt) => {
-      const texteColle = evt.target.textContent.toLowerCase().replace(/ /g,'');
+      const texteColle = evt.target.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/ /g,'');
       if ((evt.target.tagName === 'LI') && (!conteneurDeMotsCles.classList.contains(`${texteColle}`))) {
         conteneurDeMotsCles.innerHTML = '';
         motsClesChoisis.push({texte : evt.target.textContent, couleur : boutonStyle.getPropertyValue("background-color")});
@@ -79,7 +78,7 @@ class RechercheParMotsCles {
     // Évènement de suppression de mots clés
     conteneurDeMotsCles.addEventListener('click', (evt) => {
       const texte = evt.target.parentElement.firstElementChild.textContent;
-      const texteColle = texte.toLowerCase().replace(/ /g,'');
+      const texteColle = texte.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/ /g,'');
       if (evt.target.className === 'far fa-times-circle') {
         for (let mot of motsClesChoisis) {
           if (mot.texte == texte) {
@@ -93,7 +92,7 @@ class RechercheParMotsCles {
         this.afficheTousLesTypesDeMotCle();
       }
     });
-    this.filtreMotsCles();
+    this.filtreMotsCles(); /* Lance un filtrage de mots clés au chargement de la page */
   }
 
   // Activation des évènements de sélection/désélection des 3 types de mots clés
@@ -106,17 +105,27 @@ class RechercheParMotsCles {
   // Filtrage des mots clés selon la valeur du champs
   filtreMotsCles() {
     this.champs.addEventListener('input', (evt) => {
+      // Affectation du tableau de mots clés à filtrer
+      let motCles;
+      if (this.champs.id === 'rech-ingr') {
+        motCles = ingredientsFiltres;
+      } else if (this.champs.id === 'rech-appa') {
+        motCles = appareilsFiltres;
+      } else if (this.champs.id === 'rech-uste') {
+        motCles = ustencilesFiltres;
+      }
+      // Création du tableau de mots clés à afficher
       let motsClesFiltres = [];
-      const entree = evt.target.value.toLowerCase();
-      for(let element of this.tableau) {
-        if(element.toLowerCase().includes(entree)) {
+      const entree = evt.target.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      for (let element of motCles) {
+        if (element.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(entree)) {
           motsClesFiltres.push(element);
         }
       }
       this.afficheMotsCles(motsClesFiltres, this.liste);
     });
   }
-
+  
   // Modèle d'affichage de mots clés à l'intérieur des listes
   afficheMotsCles(tableau, liste) {
     liste.innerHTML = '';
@@ -194,13 +203,13 @@ class RechercheParMotsCles {
     }
     // console.log('ingredients', ingredientsFiltres, 'appareils', appareilsFiltres, 'ustenciles', ustencilesFiltres);
     // console.log("recettesFiltreesParMotsCles", recettesFiltreesParMotsCles);
-    recherchePrincipale.filtreLesMotsCles(recettesFiltreesParMotsCles, ingredientsFiltres, appareilsFiltres, ustencilesFiltres);
+    recherchePrincipale.filtreMotsCles(recettesFiltreesParMotsCles, ingredientsFiltres, appareilsFiltres, ustencilesFiltres);
     this.afficheTousLesTypesDeMotCle();
   }
 }
 export const rechercheParMotsCles = new RechercheParMotsCles();
 
 // Instances par type de recherche (ingrédients, appareils, ustenciles)
-const rechercheIngredientsParMotsCles = new RechercheParMotsCles(boutonIngredients, labelIngredients, formulaireIngredients, champsIngredients, listeIngredients, ingredientsFiltres);
-const rechercheAppareilsParMotsCles = new RechercheParMotsCles(boutonAppareils, labelAppareils, formulaireAppareils, champsAppareils, listeAppareils, appareilsFiltres);
-const rechercheUstencilesParMotsCles = new RechercheParMotsCles(boutonUstenciles, labelUstenciles, formulaireUstenciles, champsUstenciles, listeUstenciles, ustencilesFiltres);
+const rechercheIngredientsParMotsCles = new RechercheParMotsCles(boutonIngredients, labelIngredients, formulaireIngredients, champsIngredients, listeIngredients);
+const rechercheAppareilsParMotsCles = new RechercheParMotsCles(boutonAppareils, labelAppareils, formulaireAppareils, champsAppareils, listeAppareils);
+const rechercheUstencilesParMotsCles = new RechercheParMotsCles(boutonUstenciles, labelUstenciles, formulaireUstenciles, champsUstenciles, listeUstenciles);

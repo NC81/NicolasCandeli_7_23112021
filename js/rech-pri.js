@@ -29,39 +29,41 @@ export class RechercheClassique {
   // Filtre les recettes correspondant au champs en les plaçant dans le tableau "recettesFiltrees"
   filtreRecettes() {
     this.recettes = [];
-    const entree = this.champs.value.toLowerCase();
+    const entree = this.champs.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     // Si le champs est composé d'au moins 3 caractères
     if (entree.length >= 3) {
       this.conteneur.innerHTML = '';
-
+      // Lancement de la recherche
       for (let recetteJson of this.json) {
-        this.filtreParNom(entree, recetteJson);
+        this.filtreParNom(entree, recetteJson); /* ... dans les noms */
         if (!recetteTrouvee) {
-          this.filtreParDescription(entree,recetteJson);
+          this.filtreParDescription(entree, recetteJson); /* ... dans les descriptions */
         } if (!recetteTrouvee) { 
-          this.filtreParIngredient(entree, recetteJson);
+          this.filtreParIngredient(entree, recetteJson); /* ... dans les ingrédients */
         } if (!recetteTrouvee) {
-          this.filtreParAppareil(entree, recetteJson);
+          this.filtreParAppareil(entree, recetteJson); /* ... dans les appareils */
         } if (!recetteTrouvee) {
-          this.filtreParUstencile(entree, recetteJson);
+          this.filtreParUstencile(entree, recetteJson); /* ... dans les ustenciles */
         }
       }
     // Si le champs est composé de moins de 3 caractères
     } else {
+      this.conteneur.innerHTML = '';
+
       for (let recetteJson of this.json) {
         this.afficheLesRecettes(recetteJson.name, recetteJson.description, recetteJson.time, recetteJson.ingredients, recetteJson.id);
         this.recettes.push(recetteJson);
       }
     }
     recettesFiltrees = this.recettes;
-    this.filtreLesMotsCles(this.recettes, this.ingredients, this.appareils, this.ustenciles);
+    this.filtreMotsCles(this.recettes, this.ingredients, this.appareils, this.ustenciles);
   }
 
   // Vérification de la correspondance du champs avec le nom...
-  filtreParNom(valeur, tableau) {
-    if ((tableau.name.toLowerCase().includes(valeur)) && (!this.recettes.includes(tableau))) {
-      this.afficheLesRecettes(tableau.name, tableau.description, tableau.time, tableau.ingredients, tableau.id);
-      this.recettes.push(tableau);
+  filtreParNom(valeur, objet) {
+    if (objet.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(valeur)) {
+      this.afficheLesRecettes(objet.name, objet.description, objet.time, objet.ingredients, objet.id);
+      this.recettes.push(objet);
       recetteTrouvee = true;
     } else {
       recetteTrouvee = false;
@@ -69,10 +71,10 @@ export class RechercheClassique {
   }
 
   // Vérification de la correspondance du champs avec la description...
-  filtreParDescription(valeur, tableau) {
-    if ((tableau.description.toLowerCase().includes(valeur)) && (!this.recettes.includes(tableau))) {
-      this.afficheLesRecettes(tableau.name, tableau.description, tableau.time, tableau.ingredients, tableau.id);
-      this.recettes.push(tableau);
+  filtreParDescription(valeur, objet) {
+    if (objet.description.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(valeur)) {
+      this.afficheLesRecettes(objet.name, objet.description, objet.time, objet.ingredients, objet.id);
+      this.recettes.push(objet);
       recetteTrouvee = true;
     } else {
       recetteTrouvee = false;
@@ -80,11 +82,11 @@ export class RechercheClassique {
   }
 
   // Vérification de la correspondance du champs avec les ingrédients...
-  filtreParIngredient(valeur, tableau) {
-    for (let portion of tableau.ingredients) {
-      if ((portion.ingredient.toLowerCase().includes(valeur)) && (!this.recettes.includes(tableau))) {
-        this.afficheLesRecettes(tableau.name, tableau.description, tableau.time, tableau.ingredients, tableau.id);
-        this.recettes.push(tableau);
+  filtreParIngredient(valeur, objet) {
+    for (let portion of objet.ingredients) {
+      if (portion.ingredient.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(valeur)) {
+        this.afficheLesRecettes(objet.name, objet.description, objet.time, objet.ingredients, objet.id);
+        this.recettes.push(objet);
         recetteTrouvee = true;
       } else {
         recetteTrouvee = false;
@@ -93,10 +95,10 @@ export class RechercheClassique {
   }
 
   // Vérification de la correspondance du champs avec les appareils...
-  filtreParAppareil(valeur, tableau) {
-    if ((tableau.appliance.toLowerCase().includes(valeur)) && (!this.recettes.includes(tableau))) {
-      this.afficheLesRecettes(tableau.name, tableau.description, tableau.time, tableau.ingredients, tableau.id);
-      this.recettes.push(tableau);
+  filtreParAppareil(valeur, objet) {
+    if (objet.appliance.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(valeur)) {
+      this.afficheLesRecettes(objet.name, objet.description, objet.time, objet.ingredients, objet.id);
+      this.recettes.push(objet);
       recetteTrouvee = true;
     } else {
       recetteTrouvee = false;
@@ -104,17 +106,17 @@ export class RechercheClassique {
   }
 
   // Vérification de la correspondance du champs avec les ustenciles...
-  filtreParUstencile(valeur, tableau) {
-    for (let ustencile of tableau.ustensils) {
-      if ((ustencile.toLowerCase().includes(valeur)) && (!this.recettes.includes(tableau))) {
-        this.afficheLesRecettes(tableau.name, tableau.description, tableau.time, tableau.ingredients, tableau.id);
-        this.recettes.push(tableau);
+  filtreParUstencile(valeur, objet) {
+    for (let ustencile of objet.ustensils) {
+      if (ustencile.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(valeur)) {
+        this.afficheLesRecettes(objet.name, objet.description, objet.time, objet.ingredients, objet.id);
+        this.recettes.push(objet);
       }
     }
   }
 
   // Filtre les ingrédients, appareils et ustenciles compris dans les recettes filtrées
-  filtreLesMotsCles(recettes, ingredients, appareils, ustenciles) {
+  filtreMotsCles(recettes, ingredients, appareils, ustenciles) {
     ingredients = [];
     appareils = [];
     ustenciles = [];
@@ -172,9 +174,9 @@ export class RechercheClassique {
   // Affichage du message en cas de recherche infructueuse
   afficheMessage() {
     this.conteneur.innerHTML = `<aside class="galerie__mess">
-                         <span>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>
-                         <span class="far fa-times-circle"></span>
-                         </aside>`;
+                                <span>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>
+                                <span class="far fa-times-circle"></span>
+                                </aside>`;
     this.conteneur.addEventListener('click', (evt) => {
       if (evt.target.className === 'far fa-times-circle') {
         this.conteneur.innerHTML = '';
