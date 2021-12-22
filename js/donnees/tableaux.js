@@ -1,4 +1,5 @@
 import { recipes } from './recettes.js';
+import { Utilitaire } from '../utilitaires.js';
 
 // Listes
 export let recettesNonFiltrees = []; /* Recettes tirées des données json */
@@ -20,25 +21,27 @@ export class Tableau {
     }
     // Tri par noms de recette
     recettesNonFiltrees.sort((a, b) => a.name > b.name ? 1 : -1);
-    // Ajout de propriétés simplifiant la recherche
+    
+    // Modification des propriétés de chaque recette pour faciliter la recherche
     for (let recette of recettesNonFiltrees) {
+      // Ajustemement des caractères de tous les éléments et création d'un tableau d'appareils
       const listeIngredients = [];
       const listeUstenciles = [];
-      const appareil = recette.appliance.toLowerCase().charAt(0).toUpperCase() + recette.appliance.toLowerCase().slice(1);
-      const listeAppareils = appareil.split('  ');
+      const listeAppareils = Utilitaire.ajusteTaille(recette.appliance).split('  '); 
       for (let portion of recette.ingredients) {
-        const ingredient = portion.ingredient.toLowerCase().charAt(0).toUpperCase() + portion.ingredient.toLowerCase().slice(1);
+        const ingredient = Utilitaire.ajusteTaille(portion.ingredient);
         listeIngredients.push(ingredient);
       }
       for (let uste of recette.ustensils) {
-        const ustencile = uste.toLowerCase().charAt(0).toUpperCase() + uste.toLowerCase().slice(1);
+        const ustencile = Utilitaire.ajusteTaille(uste);
         listeUstenciles.push(ustencile);
       }
-      recette.pureIngredients = listeIngredients; 
+      recette.pureIngredients = listeIngredients;
       recette.ustensils = listeUstenciles;
       recette.appliance = listeAppareils;
-      /* Ajout d'une propriété contenant une chaîne de tous les mots ciblés par la recherche principale */
-      recette.resume = `${recette.name} ${recette.pureIngredients} ${recette.appliance} ${recette.ustensils} ${recette.description}`;
+      // Ajout d'une propriété contenant une chaîne de tous les mots ciblés par la recherche principale 
+      const resume = `${recette.name} ${recette.pureIngredients} ${recette.appliance} ${recette.ustensils} ${recette.description}`;
+      recette.resume = Utilitaire.remplaceDiacritiques(resume);
     }
     console.log(recettesNonFiltrees);
   }
@@ -59,13 +62,30 @@ export class Tableau {
 
   // Crée liste d'objets (ingrédients, appareils, ustenciles) à partir d'une liste de recette
   static creeListeObjets(recette, type, tableau) {
-    for (let element of recette[type]) {
-      if (!tableau.includes(element)) {
-        tableau.push(element);
+    for (let elementRecette of recette[type]) {
+    const elementRecetteSimple = Utilitaire.remplaceDiacritiques(elementRecette);
+    let trouve = false;
+      for (let elementTableau of tableau) {
+        const elementTableauSimple = Utilitaire.remplaceDiacritiques(elementTableau);
+        if (elementTableauSimple === elementRecetteSimple) {
+          trouve = true;
+        }
+      }
+      if (!trouve) {
+        tableau.push(elementRecette);
       }
     }
-    tableau.sort((a, b) => a.normalize("NFD").replace(/[\u0300-\u036f]/g, "") > b.normalize("NFD").replace(/[\u0300-\u036f]/g, "") ? 1 : -1);
+    tableau.sort((a, b) => Utilitaire.remplaceDiacritiques(a) > Utilitaire.remplaceDiacritiques(b) ? 1 : -1);
   }
+  
+//   static creeListeObjets(recette, type, tableau) {
+//     for (let element of recette[type]) {
+//       if (!tableau.includes(element)) {
+//         tableau.push(element);
+//       }
+//     }
+//     tableau.sort((a, b) => Utilitaire.remplaceDiacritiques(a) > Utilitaire.remplaceDiacritiques(b) ? 1 : -1);
+//   }
 
   // Réduit la liste de recettes préalablement filtrées par le champs principal (même vide)
   static reduitListeRecettesParMotCle(element, tableau, couleur, type) {
@@ -81,9 +101,9 @@ export class Tableau {
   // Crée la liste de mots clés à afficher
   static creeListeMotClesParChamps(evt, tableau) {
     motsClesFiltres = [];
-    const entree = evt.target.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const entree = Utilitaire.remplaceDiacritiques(evt.target.value);
     for (let element of tableau) {
-      if (element.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(entree)) {
+      if (Utilitaire.remplaceDiacritiques(element).includes(entree)) {
         motsClesFiltres.push(element);
       }
     }

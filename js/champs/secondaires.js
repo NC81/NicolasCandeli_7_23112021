@@ -49,13 +49,13 @@ export class ChampsSecondaires {
       if (this.bouton.getAttribute('aria-expanded') === 'true') {
         this.label.click();
       }
-    })
+    });
   }
 
   // Filtre les recettes et les mots clés lors d'un ajout de mot clé
   filtreRecettesParMotCle() {
     this.liste.addEventListener('click', (evt) => {
-      this.formulaire.style.display = "none"; /* Fermeture du formulaire */
+      this.label.click(); /* Fermeture du formulaire */
       this.champs.value = ''; /* Vidage du champs secondaire */
       MotsCles.ajoute(evt, this.bouton); /* Ajout du bouton dans le DOM et du mot clé dans la liste de mots clés */
       recherche.filtreRecettesParMotsCles(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots clés */

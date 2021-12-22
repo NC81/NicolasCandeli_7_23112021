@@ -1,5 +1,6 @@
 import { affichage, galerie } from './affichage.js';
 import { recettesNonFiltrees, Tableau } from './donnees/tableaux.js';
+import { Utilitaire } from './utilitaires.js';
 
 // DOM
 export const champsPrincipal = document.querySelector('#rech-princ');
@@ -19,14 +20,14 @@ export class Recherche {
   // Filtre les recettes correspondant à la valeur du champs (affiche les recettes et les copie dans "recettesFiltreesParChampsPrincipal")
   filtreRecettesParChampsPrincipal() {
     this.recettes = []; /* Initialisation de la liste de recettes filtrées */
-    const entree = this.champs.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const entree = Utilitaire.remplaceDiacritiques(this.champs.value);
     this.conteneur.innerHTML = '';
     // Si le champs est composé d'au moins 3 caractères...
     if (entree.length >= 3) {
       // Lancement de la recherche se concluant par l'affichage des recettes et le remplissage de la liste de recettes filtrées
       for (let recetteNonFiltree of recettesNonFiltrees) {
-        if (recetteNonFiltree.resume.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(entree)) {
-          affichage.inscritRecettes(recetteNonFiltree.name, recetteNonFiltree.description, recetteNonFiltree.time, recetteNonFiltree.ingredients);
+        if (recetteNonFiltree.resume.includes(entree)) {
+          affichage.inscritRecettes(recetteNonFiltree);
           this.recettes.push(recetteNonFiltree);
         }
       }
@@ -34,7 +35,7 @@ export class Recherche {
     } else {
       // Affichage de toutes les recettes et création d'une nouvelle liste
       for (let recetteNonFiltree of recettesNonFiltrees) {
-        affichage.inscritRecettes(recetteNonFiltree.name, recetteNonFiltree.description, recetteNonFiltree.time, recetteNonFiltree.ingredients);
+        affichage.inscritRecettes(recetteNonFiltree);
         this.recettes.push(recetteNonFiltree);
       }
     }
@@ -58,7 +59,7 @@ export class Recherche {
     this.conteneur.innerHTML = '';
     // Affichage de chaque recette de la liste obtenue
     for (let recetteFiltreeParMotCle of recettesFiltreesParMotsCles) {
-      affichage.inscritRecettes(recetteFiltreeParMotCle.name, recetteFiltreeParMotCle.description, recetteFiltreeParMotCle.time, recetteFiltreeParMotCle.ingredients);
+      affichage.inscritRecettes(recetteFiltreeParMotCle);
     }
   }
 }

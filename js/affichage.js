@@ -13,30 +13,31 @@ export class Affichage {
     this.conteneur = conteneur
   }
 
-  // Affiche les recettes filtrées
-  inscritRecettes(nom, description, duree, ingredients) {
-    const fragment = document.createDocumentFragment();
-      // Création de recettes
+  // Affiche la recette filtrée
+  inscritRecettes(recette) {
+    const fragment = document.createDocumentFragment()
+      // Création de la recette
       const nouveauArticle = document.createElement('article');
       fragment.appendChild(nouveauArticle);
       nouveauArticle.classList.add('plat');
       nouveauArticle.innerHTML = `<img src="https://via.placeholder.com/150/C7BEBE?text=+" alt="" />
                                   <div class="plat-intro">
-                                  <h2>${nom}</h2>
-                                  <div><span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">${duree}</span></div>
+                                  <h2>${recette.name}</h2>
+                                  <div><span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">${recette.time}</span></div>
                                   </div>
                                   <div class="plat-recette"><ul class="plat-recette__liste"></ul>
-                                  <p class="plat-recette__descr">${description}</p>
+                                  <p class="plat-recette__descr">${recette.description}</p>
                                   </div>`;
       // Génération d'ingrédients dans la recette
-      for (let portion of ingredients) {
+      for (let portion of recette.ingredients) {
         const nouveauLi = document.createElement('li');
         fragment.firstElementChild.children[2].firstElementChild.appendChild(nouveauLi);
         nouveauLi.innerHTML = `<span class="plat-recette__ingr">${portion.ingredient}:</span><span class="plat-recette__quant"> ${portion.quantity ?? ''} ${portion.unit ?? ''}</span>`;
       }
-    this.conteneur.appendChild(fragment); /* Affichage de la recette */
+    // Affichage de la recette
+    this.conteneur.appendChild(fragment); 
   }
-  
+
   // Affiche un message en cas de recherche infructueuse
   inscritMessage() {
     this.conteneur.innerHTML = `<aside class="galerie__mess">
@@ -50,7 +51,7 @@ export class Affichage {
     });
   }
 
-  // Affiche les mots clés dans un formulaire
+  // Affiche les mots clés dans un formulaire (selon une liste de mots clés et un conteneur DOM pour les accueillir)
   static inscritMotsClesParFormulaire(liste, dom) {
     dom.innerHTML = '';
     const fragment = document.createDocumentFragment();

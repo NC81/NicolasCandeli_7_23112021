@@ -7,13 +7,11 @@ const conteneurDeMotsCles = document.querySelector('.header__selec');
 export class MotsCles {
   // Ajout de mot clé
   static ajoute(evt, btn) {
-    const boutonStyle = window.getComputedStyle(btn); /* comment ajouter cette ligne hors de l'evt (perfs) ? */
-    const texteColle = evt.target.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/ /g,'');
+    const boutonStyle = window.getComputedStyle(btn);
     // Délégation d'évènement
-    if ((evt.target.tagName === 'LI') && (!conteneurDeMotsCles.classList.contains(`${texteColle}`))) {
+    if ((evt.target.tagName === 'LI') && (!motsClesChoisis.map(mot => mot.texte).includes(evt.target.textContent))) {
       conteneurDeMotsCles.innerHTML = '';
       motsClesChoisis.push({texte : evt.target.textContent, couleur : boutonStyle.getPropertyValue("background-color")}); /* Ajout du mot clé dans la liste dédiée (texte et couleur) */
-      conteneurDeMotsCles.classList.add(`${texteColle}`);
       // Création de boutons de mots clés
       for (let motCle of motsClesChoisis) {
         let nouveauBouton = document.createElement('button');
@@ -29,12 +27,10 @@ export class MotsCles {
   // Suppression de mot clé
   static supprime(evt) {
     const texte = evt.target.parentElement.firstElementChild.textContent;
-    const texteColle = texte.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/ /g,'');
     if (evt.target.className === 'far fa-times-circle') {
       for (let i = 0; i < motsClesChoisis.length; i++) {
-        if (motsClesChoisis[i].texte == texte) {
+        if (motsClesChoisis[i].texte === texte) {
           motsClesChoisis.splice(i, 1); /* Suppression du mot clé de la liste */
-          conteneurDeMotsCles.classList.remove(`${texteColle}`);
         }
       }
       evt.target.parentElement.remove(); /* Suppression du bouton correspondant */

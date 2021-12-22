@@ -9,16 +9,25 @@
   padding-left: 20px;
   text-align: left;
   &__cont {
-    font-weight: 700;
+    font-weight: bold;
   }
   &--ingr {
     background-color: $clr-btn1;
+    &:hover {
+      background-color: darken($clr-btn1, 10%);
+    }
   }
   &--appa {
     background-color: $clr-btn2;
+    &:hover {
+      background-color: darken($clr-btn2, 10%);
+    }
   }
   &--uste {
     background-color: $clr-btn3;
+    &:hover {
+      background-color: darken($clr-btn3, 10%);
+    }
   }
   .fa-chevron-down {
     position: absolute;
@@ -37,11 +46,15 @@
   padding: 0 55px 0 20px;
   margin: 25px 15px 0 0;
   &__cont {
-      font-weight: 700;
+    font-weight: bold;
   }
   .fa-times-circle {
     position: absolute;
     font-size: 20px;
     right: 22px;
+    cursor: pointer;
+    &:hover {
+      font-weight: bold;
+    }
   }
 }
