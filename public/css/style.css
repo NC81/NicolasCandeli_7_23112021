@@ -28,6 +28,7 @@ input {
 
 button {
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .header {
@@ -107,18 +108,22 @@ button {
   color: white;
   border-radius: 5px;
   padding: 0 19px 10px 19px;
-  z-index: 1;
+  z-index: 2;
 }
 .form-categ label {
   position: absolute;
-  right: 28px;
+  right: 20px;
   line-height: 69px;
+  padding: 0 10px;
+  cursor: pointer;
 }
 .form-categ input {
   width: calc(100% - 50px);
   height: 69px;
   border-radius: 5px;
   border: none;
+  outline: none;
+  font-size: 1em;
   color: white;
 }
 .form-categ input::placeholder {
@@ -139,6 +144,10 @@ button {
   text-align: left;
   width: 23%;
   line-height: 31.8px;
+  cursor: pointer;
+}
+.form-categ__liste li:hover {
+  font-weight: bold;
 }
 .form-categ--ingr {
   background-color: #3282F7;
@@ -162,6 +171,18 @@ button {
   background-color: #ED6454;
 }
 
+.bloqueur {
+  content: " ";
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 1;
+}
+
 .btn {
   position: relative;
   width: 170px;
@@ -174,16 +195,25 @@ button {
   text-align: left;
 }
 .btn__cont {
-  font-weight: 700;
+  font-weight: bold;
 }
 .btn--ingr {
   background-color: #3282F7;
 }
+.btn--ingr:hover {
+  background-color: #0966ed;
+}
 .btn--appa {
   background-color: #68D9A4;
 }
+.btn--appa:hover {
+  background-color: #3fcf8b;
+}
 .btn--uste {
   background-color: #ED6454;
+}
+.btn--uste:hover {
+  background-color: #e83a26;
 }
 .btn .fa-chevron-down {
   position: absolute;
@@ -202,12 +232,16 @@ button {
   margin: 25px 15px 0 0;
 }
 .btn-mini__cont {
-  font-weight: 700;
+  font-weight: bold;
 }
 .btn-mini .fa-times-circle {
   position: absolute;
   font-size: 20px;
   right: 22px;
+  cursor: pointer;
+}
+.btn-mini .fa-times-circle:hover {
+  font-weight: bold;
 }
 
 .plat {
@@ -251,8 +285,12 @@ button {
 }
 .plat-recette__descr {
   font-family: "Roboto", sans-serif;
-  line-height: 12px;
+  line-height: 13px;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=style.css.map */
