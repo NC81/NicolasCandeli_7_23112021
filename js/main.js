@@ -1,4 +1,4 @@
-import { Tableau, tableau } from './donnees/tableaux.js';
+import { Tableau, tableau, recettesNonFiltrees } from './donnees/tableaux.js';
 import { recherche, recettesFiltreesParChampsPrincipal } from './recherche.js';
 import { rechercheParChampsPrincipal } from './champs/principal.js';
 import { Affichage } from './affichage.js';
@@ -9,9 +9,9 @@ tableau.creeListeRecettesNonFiltrees();
 
 // CHAMPS PRINCIPAL
 // Filtrage des recettes au chargement de la page
-recherche.filtreRecettesParChampsPrincipal();
+recherche.filtreRecettesParChampsPrincipal(recettesNonFiltrees);
 // Évènement de filtrage de recettes par le champs principal
-rechercheParChampsPrincipal(); 
+rechercheParChampsPrincipal();
 
 // CHAMPS SECONDAIRES
 // Affichage des mots clés au chargement de la page

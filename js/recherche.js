@@ -1,5 +1,5 @@
 import { affichage, galerie } from './affichage.js';
-import { recettesNonFiltrees, Tableau } from './donnees/tableaux.js';
+import { Tableau } from './donnees/tableaux.js';
 import { Utilitaire } from './utilitaires.js';
 
 // DOM
@@ -11,35 +11,36 @@ export let recettesFiltreesParMotsCles;
 
 // Classe de recherche classique
 export class Recherche {
-  constructor(champs, recettes, conteneur) {
+  // recettes = recettesNonFiltrees;
+  constructor(champs, conteneur) {
     this.champs = champs, /* Champs de saisie */
-    this.recettes = recettes, /* Recette triées à partir du champs */
     this.conteneur = conteneur /* Conteneur de toutes les recettes affichées */
   }
 
   // Filtre les recettes correspondant à la valeur du champs (affiche les recettes et les copie dans "recettesFiltreesParChampsPrincipal")
-  filtreRecettesParChampsPrincipal() {
-    this.recettes = []; /* Initialisation de la liste de recettes filtrées */
+  filtreRecettesParChampsPrincipal(recettes) {
     const entree =  Utilitaire.remplaceDiacritiques(this.champs.value);
     this.conteneur.innerHTML = '';
     // Si le champs est composé d'au moins 3 caractères...
     if (entree.length >= 3) {
       // Lancement de la recherche se concluant par l'affichage des recettes et le remplissage de la liste de recettes filtrées
-      recettesNonFiltrees.forEach(recetteNonFiltree => {
-        if (recetteNonFiltree.resume.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(entree)) {          
-          affichage.inscritRecettes(recetteNonFiltree);
-          this.recettes.push(recetteNonFiltree);
-        }
-      });
+      recettesFiltreesParChampsPrincipal = recettes.filter(recette => this.constructor.filtre(recette, entree));
     // Si le champs est composé de moins de 3 caractères...
     } else {
-      // Affichage de toutes les recettes et création d'une nouvelle liste
-      recettesNonFiltrees.forEach(recetteNonFiltree => {
-        affichage.inscritRecettes(recetteNonFiltree);
-        this.recettes.push(recetteNonFiltree);
-      });
+      // // Affichage de toutes les recettes et création d'une nouvelle liste
+      recettesFiltreesParChampsPrincipal = recettes.filter(recette => this.constructor.filtre(recette, ''));
     }
-    recettesFiltreesParChampsPrincipal = this.recettes;
+    // console.log('recettes filtrées', recettesFiltreesParChampsPrincipal);
+  }
+  
+  // Affiche les recettes correspondant à la recherche puis renvoie un booléen (callback de la méthode filter)
+  static filtre(element, chaine) {
+    if (element.resume.includes(chaine)) {
+      affichage.inscritRecettes(element);
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Filtre les recettes filtrées par le champs principal (même vide) à partir d'une liste de mots clés
@@ -63,4 +64,4 @@ export class Recherche {
     }
   }
 }
-export const recherche = new Recherche(champsPrincipal, recettesFiltreesParChampsPrincipal, galerie);
+export const recherche = new Recherche(champsPrincipal, galerie);

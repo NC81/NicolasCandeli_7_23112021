@@ -10,15 +10,15 @@ export let motsClesFiltres; /* Mots clés filtrés par le remplissage du champs 
 
 // Classe comportant les méthodes générant des données sous forme de liste
 export class Tableau {
-  constructor(json) {
+  constructor(json = recipes) {
     this.json = json
   }
   // Crée une liste tirée des données json au chargement de la page
   creeListeRecettesNonFiltrees() {
     // Remplissage de la liste
     recettesNonFiltrees = this.json
-                         .map(recetteJson => recetteJson) /* Copie de la liste json */
-                         .sort((a, b) => a.name > b.name ? 1 : -1) /* Tri par noms de recette */
+                         .slice(0) /* Copie de la liste json */
+                         .sort((a, b) => a.name > b.name ? 1 : -1) /* Tri par noms de recettes */
     
     // Modification des propriétés de chaque recette pour faciliter la recherche
     recettesNonFiltrees.map(recette =>  {
@@ -31,7 +31,7 @@ export class Tableau {
       const resume = `${recette.name} ${recette.pureIngredients} ${recette.appliance} ${recette.ustensils} ${recette.description}`;
       recette.resume = Utilitaire.remplaceDiacritiques(resume);
     })
-    console.log(recettesNonFiltrees);
+    // console.log('recettes non filtrées', recettesNonFiltrees);
   }
 
   // Ajoute les ingrédients, appareils et ustenciles compris dans les recettes filtrées dans des tableaux distincts
@@ -98,4 +98,4 @@ export class Tableau {
     console.log('mots', motsClesFiltres);
   }
 }
-export const tableau = new Tableau(recipes);
+export const tableau = new Tableau();

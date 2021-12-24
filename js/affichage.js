@@ -35,7 +35,7 @@ export class Affichage {
         nouveauLi.innerHTML = `<span class="plat-recette__ingr">${portion.ingredient}:</span><span class="plat-recette__quant"> ${portion.quantity ?? ''} ${portion.unit ?? ''}</span>`;
       }
     // Affichage de la recette
-    this.conteneur.appendChild(fragment); 
+    this.conteneur.appendChild(fragment);
   }
 
   // Affiche un message en cas de recherche infructueuse
