@@ -1,43 +1,58 @@
-export let motsClesChoisis = [];
+export let motsClesChoisis = []; /* Liste de mots-clés cliqués */
 
 //  DOM
 const conteneurDeMotsCles = document.querySelector('.header__selec');
 
-// Classe comportant les méthodes d'ajout et de suppression de mots clés appelées par des évènements de cliquage (secondaires.js)
+// Classe comportant les méthodes d'ajout et de suppression de mots-clés appelées par des évènements de cliquage (secondaires.js)
 export class MotsCles {
-  // Ajout de mot clé
-  static ajoute(evt, btn) {
-    const boutonStyle = window.getComputedStyle(btn); /* Style du bouton d'ouverture */
-    // Délégation d'évènement (si la cible est un élément <li> et si le tableau de mot clés ne contient pas sa chaîne ...)
-    if ((evt.target.tagName === 'LI') && (!motsClesChoisis.map(mot => mot.texte).includes(evt.target.textContent))) {
-      conteneurDeMotsCles.innerHTML = '';
-      // ... alors le mot clé est ajouté dans la liste dédiée ("texte" : chaîne du mot clé, "couleur" : couleur du bouton d'ouverture)
-      motsClesChoisis.push({texte : evt.target.textContent, couleur : boutonStyle.getPropertyValue("background-color")}); 
-      // Création de boutons de mots clés
-      for (let motCle of motsClesChoisis) {
-        let nouveauBouton = document.createElement('button');
-        conteneurDeMotsCles.appendChild(nouveauBouton);
-        nouveauBouton.classList.add('btn-mini');
-        nouveauBouton.innerHTML = `<span class="btn-mini__cont">${motCle.texte}</span><span class="far fa-times-circle"></span>`;
-        nouveauBouton.style.backgroundColor = motCle.couleur; /* Exploitation de la couleur du bouton d'ouverture */
-      }
-    }
-    // console.log('mots clés', motsClesChoisis);
+  constructor(nom, couleur, type) {
+    this.nom = nom,
+    this.couleur = couleur,
+    this.type = type
   }
 
-  // Suppression de mot clé
+  // Crée un objet avec 3 propriétés à partir d'un mot-clé
+  creeMotCle() {
+    const motCle = { nom : this.nom, /* Chaîne du mot-clé */
+                     couleur : this.couleur, /* Couleur du mot-clé à afficher sur le bouton (dépendant de son type) */
+                     type : this.type /* Nom de la propriété listant les mots-clés du même type dans chaque recette */
+                   };
+    return motCle;
+  }
+
+  // Crée un bouton de mot-clé sous le champs principal
+  static creeBouton(element) {
+    let nouveauBouton = document.createElement('button');
+    conteneurDeMotsCles.appendChild(nouveauBouton);
+    nouveauBouton.classList.add('btn-mini');
+    nouveauBouton.innerHTML = `<span class="btn-mini__cont">${element.nom}</span><span class="far fa-times-circle"></span>`;
+    nouveauBouton.style.backgroundColor = element.couleur;
+  }
+  
+  // Ajout de mot-clé
+  static ajoute(evt, liste) {
+    // Délégation d'évènement : si le contenu de la cible correspond à un élément de la liste générale de mots-clés et si la liste de mot-clés cliqués ne contient pas le mot-clé ciblé ...
+    let listeElementCible = liste.filter(el => el.nom === evt.target.textContent);
+    if ((evt.target.textContent === listeElementCible[0].nom) && (!motsClesChoisis.map(mot => mot.texte).includes(evt.target.textContent))) {
+      motsClesChoisis.push(listeElementCible[0]); /* Ajout du mot-clé dans la liste dédiée */
+      this.creeBouton(listeElementCible[0]); /* Appel de la méthode de création de bouton */
+    }
+    console.log('mots-clés', motsClesChoisis);
+  }
+
+  // Suppression de mot-clé
   static supprime(evt) {
     const texte = evt.target.parentElement.firstElementChild.textContent; /* Chaîne du bouton cliqué */
-    // Délégation d'évènement : si la cible est l'icône placée dans le bouton du mot clé ...
+    // Délégation d'évènement : si la cible est l'icône placée dans le bouton du mot-clé ...
     if (evt.target.className === 'far fa-times-circle') {
       for (let i = 0; i < motsClesChoisis.length; i++) {
-        // et si la chaîne du bouton correspond à un objet de la liste de mots clés ...
-        if (motsClesChoisis[i].texte === texte) {
-          motsClesChoisis.splice(i, 1); /* ... alors le mot clé est supprimé de la liste ... */
+        // Et si la chaîne du bouton correspond à un élément de la liste de mots-clés ...
+        if (motsClesChoisis[i].nom === texte) {
+          motsClesChoisis.splice(i, 1); /* Suppression du mot-clé de la liste */
         }
       }
-      evt.target.parentElement.remove(); /* ... et le bouton est retiré du DOM */
-      // console.log('mots clés', motsClesChoisis);
+      evt.target.parentElement.remove(); /* Effacement du bouton du DOM */
+      console.log('mots-clés', motsClesChoisis);
     }
   }
 }

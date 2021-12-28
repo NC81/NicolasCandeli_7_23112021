@@ -6,7 +6,7 @@ export class Utilitaire {
   }
   
   // Remplace les accents, trémas et cédilles
-  static remplaceDiacritiques(texte) {
+  static harmonise(texte) {
     return texte.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   }
 }
