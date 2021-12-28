@@ -35,7 +35,7 @@ export class Affichage {
         nouveauLi.innerHTML = `<span class="plat-recette__ingr">${portion.ingredient}:</span><span class="plat-recette__quant"> ${portion.quantity ?? ''} ${portion.unit ?? ''}</span>`;
       }
     // Affichage de la recette
-    this.conteneur.appendChild(fragment); 
+    this.conteneur.appendChild(fragment);
   }
 
   // Affiche un message en cas de recherche infructueuse
@@ -51,19 +51,19 @@ export class Affichage {
     });
   }
 
-  // Affiche les mots clés dans un formulaire (selon une liste de mots clés et un conteneur DOM pour les accueillir)
+  // Affiche les mots-clés dans un formulaire (selon une liste de mots-clés et un conteneur DOM pour les accueillir)
   static inscritMotsClesParFormulaire(liste, dom) {
     dom.innerHTML = '';
     const fragment = document.createDocumentFragment();
     for (let element of liste) {
       const nouveauLi = document.createElement('li');
       fragment.appendChild(nouveauLi);
-      nouveauLi.innerHTML = element;
+      nouveauLi.innerHTML = element.nom;
     }
-    dom.appendChild(fragment); /* Affichage de la liste de mots clés */
+    dom.appendChild(fragment); /* Affichage de la liste de mots-clés */
   }
   
-  // Affiche les mots clés dans les 3 formulaires
+  // Affiche les mots-clés dans les 3 formulaires
   static inscritMotsClesDansTroisFormulaires() {
     this.inscritMotsClesParFormulaire(ingredientsFiltres, listeIngredients);
     this.inscritMotsClesParFormulaire(appareilsFiltres, listeAppareils);

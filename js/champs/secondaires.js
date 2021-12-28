@@ -34,63 +34,63 @@ export class ChampsSecondaires {
 
   // Contrôle l'ouverture et la fermeture des champs de recherche
   ouvreFormulaire() {
-    this.bouton.addEventListener("click", () => { /* Ouvre le formulaire lors d'un cliquage sur le bouton */
-      this.formulaire.style.display = "block";
-      bloqueur.style.display = "block";
+    this.bouton.addEventListener("click", () => { /* Lors d'un cliquage sur le bouton d'ouverture ... */
+      this.formulaire.style.display = "block"; /*  Ouvre le formulaire */
+      bloqueur.style.display = "block"; /* Ouvre le bloqueur recouvrant le reste de la page */
       this.bouton.setAttribute('aria-expanded', 'true');
     });
-    this.label.addEventListener("click", (evt) => { /* Ferme le formulaire lors d'un cliquage sur le label */
+    this.label.addEventListener("click", (evt) => { /* Lors d'un cliquage sur le label ... */
       evt.preventDefault();
-      this.formulaire.style.display = "none";
-      bloqueur.style.display = "none";
+      this.formulaire.style.display = "none"; /* Ferme le formulaire */
+      bloqueur.style.display = "none"; /* Ferme le bloqueur */
       this.bouton.setAttribute('aria-expanded', 'false');
     });
-    bloqueur.addEventListener('click', () => { /* Ferme le formulaire lors d'un cliquage à l'extérieur */
+    bloqueur.addEventListener('click', () => { /* Lors d'un cliquage sur le bloqueur ... */
       if (this.bouton.getAttribute('aria-expanded') === 'true') {
-        this.label.click();
+        this.label.click(); /* Ferme le formulaire ouvert */
       }
     });
   }
 
-  // Filtre les recettes et les mots clés lors d'un ajout de mot clé
+  // Filtre les recettes et les mots-clés par le cliquage de mots-clés
   filtreRecettesParMotCle() {
-    this.liste.addEventListener('click', (evt) => {
+    this.liste.addEventListener('click', (evt) => { /* Lors d'un cliquage dans le formulaire ... */
       this.label.click(); /* Fermeture du formulaire */
       this.champs.value = ''; /* Vidage du champs secondaire */
-      MotsCles.ajoute(evt, this.bouton); /* Ajout du bouton dans le DOM et du mot clé dans la liste de mots clés */
-      recherche.filtreRecettesParMotsCles(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots clés */
-      Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, appareils et ustenciles */
-      Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots clés dans les 3 formulaires */
+      MotsCles.ajoute(evt, this.constructor.choisitListe(this.champs)); /* Ajout du bouton dans le DOM et du mot-clé dans la liste de mots-clés */
+      recherche.filtreRecettesParMotsCles(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots-clés */
+      Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, d'appareils et d'ustenciles */
+      Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots-clés dans les 3 formulaires */
     });
   }
 
-  // Filtre les mots clés dans les formulaires par le remplissage du champs secondaire
+  // Filtre les mots-clés dans les formulaires par le remplissage du champs secondaire
   filtreMotsCles() {
-    this.champs.addEventListener('input', (evt) => {
-      Tableau.creeListeMotClesParChamps(evt, this.constructor.choisitListe(this.champs)); /* Création de la liste de mots clés à afficher selon l'entrée */
-      Affichage.inscritMotsClesParFormulaire(motsClesFiltres, this.liste); /* Affichage des mots clés dans le formulaire correspondant */
+    this.champs.addEventListener('input', (evt) => { /* Lors d'une modification du champs ... */
+      Tableau.creeListeMotClesParChamps(evt, this.constructor.choisitListe(this.champs)); /* Création de la liste de mots-clés à afficher selon l'entrée */
+      Affichage.inscritMotsClesParFormulaire(motsClesFiltres, this.liste); /* Affichage des mots-clés dans le formulaire correspondant */
     });
   }
   
-  // Filtre les recettes et les mots clés lors d'une suppression de mot clé
+  // Filtre les recettes et les mots-clés lors d'une suppression de mot-clé
   static supprimeMotCle() {
-    conteneurDeMotsCles.addEventListener('click', (evt) => {
-      MotsCles.supprime(evt);  /* Suppression du bouton dans le DOM et du mot clé dans la liste de mots clés */
-      recherche.filtreRecettesParMotsCles(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots clés */
-      Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, appareils et ustenciles */
-      Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots clés dans les 3 formulaires */
+    conteneurDeMotsCles.addEventListener('click', (evt) => { /* Lors d'un cliquage sur le conteneur de mots-clés ... */
+      MotsCles.supprime(evt);  /* Suppression du bouton dans le DOM et du mot-clé dans la liste de mots-clés */
+      recherche.filtreRecettesParMotsCles(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots-clés */
+      Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, d'appareils et d'ustenciles */
+      Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots-clés dans les 3 formulaires */
     });
   }
 
-  // Sélectionne la liste (d'ingrédients, d'appareils ou d'ustenciles) correspondant au champs modifié
+  // Sélectionne la liste (d'ingrédients, d'appareils ou d'ustenciles) correspondant au champs
   static choisitListe(champs) {
     if (champs.id === 'rech-ingr') {
       return ingredientsFiltres;
     }
-    else if(champs.id === 'rech-appa') {
+    else if (champs.id === 'rech-appa') {
       return appareilsFiltres;
     }
-    else if(champs.id === 'rech-uste') {
+    else if (champs.id === 'rech-uste') {
       return ustencilesFiltres;
     }
   }
