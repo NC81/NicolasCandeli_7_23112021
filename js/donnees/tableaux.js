@@ -25,32 +25,32 @@ export class Tableau {
     recettesNonFiltrees.map(recette =>  {
       // Ajustemement des caractères de tous les éléments et création d'un tableau d'appareils
       recette.pureIngredients = recette.ingredients.map(portion => Utilitaire.ajusteTaille(portion.ingredient))
-      recette.ustensils = recette.ustensils.map(ustencile => Utilitaire.ajusteTaille(ustencile))
+      recette.ustensils = recette.ustensils.map(ustensile => Utilitaire.ajusteTaille(ustensile))
       recette.appliance = Utilitaire.ajusteTaille(recette.appliance).split('  ');
         
       // Ajout d'une propriété contenant une chaîne de tous les mots ciblés par la recherche principale 
       const resume = `${recette.name} ${recette.pureIngredients} ${recette.appliance} ${recette.ustensils} ${recette.description}`;
       recette.resume = Utilitaire.harmonise(resume);
     })
-    // console.log('recettes non filtrées', recettesNonFiltrees);
+    console.log('recettes non filtrées', recettesNonFiltrees);
   }
 
-  // Ajoute les ingrédients, appareils et ustenciles compris dans les recettes filtrées dans des tableaux distincts
+  // Ajoute les ingrédients, appareils et ustensiles compris dans les recettes filtrées dans des tableaux distincts
   static creeListesMotsCles(recettes) {
     ingredientsFiltres = [];
     appareilsFiltres = [];
     ustencilesFiltres = [];
 
-    // Répartition des ingrédients, appareils et ustenciles dans leurs listes respectives pour chaque recette
+    // Répartition des ingrédients, appareils et ustensiles dans leurs listes respectives pour chaque recette
     for (let recette of recettes) {
       this.creeListeObjets(recette, 'pureIngredients', 'rgb(50, 130, 247)', ingredientsFiltres); /* Crée liste d'ingrédients */
       this.creeListeObjets(recette, 'appliance', 'rgb(104, 217, 164)', appareilsFiltres); /* Crée liste d'appareils */
-      this.creeListeObjets(recette, 'ustensils', 'rgb(237, 100, 84)', ustencilesFiltres); /* Crée liste d'ustenciles */
+      this.creeListeObjets(recette, 'ustensils', 'rgb(237, 100, 84)', ustencilesFiltres); /* Crée liste d'ustensiles */
     }
     // console.log(ingredientsFiltres, appareilsFiltres, ustencilesFiltres);
   }
 
-  // Crée liste d'objets (ingrédients, appareils, ustenciles) à partir d'une liste de recette
+  // Crée liste d'objets (ingrédients, appareils, ustensiles) à partir d'une liste de recette
   static creeListeObjets(recette, type, couleur, tableau) {
     for (let elementRecette of recette[type]) {
     const nouveauMotCle = new MotsCles(elementRecette, couleur, type); 
@@ -98,10 +98,11 @@ export class Tableau {
 
   // Crée la liste de mots-clés à afficher
   static creeListeMotClesParChamps(evt, tableau) {
+    console.log('tableau mots', tableau);
     motsClesFiltres = [];
     const entree = Utilitaire.harmonise(evt.target.value);
     for (let element of tableau) {
-      if (Utilitaire.harmonise(element).includes(entree)) {
+      if (Utilitaire.harmonise(element.nom).includes(entree)) {
         motsClesFiltres.push(element);
       }
     }

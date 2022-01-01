@@ -1,4 +1,5 @@
 import { ingredientsFiltres, appareilsFiltres, ustencilesFiltres } from './donnees/tableaux.js';
+import { Utilitaire } from './utilitaires.js';
 
 export const galerie = document.querySelector('.galerie');
 
@@ -32,7 +33,7 @@ export class Affichage {
       for (let portion of recette.ingredients) {
         const nouveauLi = document.createElement('li');
         fragment.firstElementChild.children[2].firstElementChild.appendChild(nouveauLi);
-        nouveauLi.innerHTML = `<span class="plat-recette__ingr">${portion.ingredient}:</span><span class="plat-recette__quant"> ${portion.quantity ?? ''} ${portion.unit ?? ''}</span>`;
+        nouveauLi.innerHTML = `<span class="plat-recette__ingr">${portion.ingredient}</span><span class="plat-recette__quant">${Utilitaire.afficheDeuxPoints(portion) + (portion.quantity ?? '')} ${portion.unit ?? ''}</span>`;
       }
     // Affichage de la recette
     this.conteneur.appendChild(fragment);

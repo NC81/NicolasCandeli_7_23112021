@@ -33,7 +33,7 @@ export class MotsCles {
   static ajoute(evt, liste) {
     // Délégation d'évènement : si le contenu de la cible correspond à un élément de la liste générale de mots-clés et si la liste de mot-clés cliqués ne contient pas le mot-clé ciblé ...
     let listeElementCible = liste.filter(el => el.nom === evt.target.textContent);
-    if ((evt.target.textContent === listeElementCible[0].nom) && (!motsClesChoisis.map(mot => mot.texte).includes(evt.target.textContent))) {
+    if ((evt.target.textContent === listeElementCible[0].nom) && (!motsClesChoisis.map(mot => mot.nom).includes(evt.target.textContent))) {
       motsClesChoisis.push(listeElementCible[0]); /* Ajout du mot-clé dans la liste dédiée */
       this.creeBouton(listeElementCible[0]); /* Appel de la méthode de création de bouton */
     }
@@ -42,12 +42,12 @@ export class MotsCles {
 
   // Suppression de mot-clé
   static supprime(evt) {
-    const texte = evt.target.parentElement.firstElementChild.textContent; /* Chaîne du bouton cliqué */
+    const chaine = evt.target.parentElement.firstElementChild.textContent; /* Chaîne du bouton cliqué */
     // Délégation d'évènement : si la cible est l'icône placée dans le bouton du mot-clé ...
     if (evt.target.className === 'far fa-times-circle') {
       for (let i = 0; i < motsClesChoisis.length; i++) {
         // Et si la chaîne du bouton correspond à un élément de la liste de mots-clés ...
-        if (motsClesChoisis[i].nom === texte) {
+        if (motsClesChoisis[i].nom === chaine) {
           motsClesChoisis.splice(i, 1); /* Suppression du mot-clé de la liste */
         }
       }

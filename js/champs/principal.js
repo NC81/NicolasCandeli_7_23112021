@@ -14,7 +14,7 @@ export class ChampsPrincipal {
         affichage.inscritMessage(); /* Affichage du message d'alerte */
       // Sinon ...
       } else {
-        Tableau.creeListesMotsCles(this.choisitListe(motsClesChoisis)); /* Création des listes d'ingrédients, d'appareils et d'ustenciles */
+        Tableau.creeListesMotsCles(this.choisitListe(motsClesChoisis)); /* Création des listes d'ingrédients, d'appareils et d'ustensiles */
         Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots-clés dans les 3 formulaires */
       }
     });

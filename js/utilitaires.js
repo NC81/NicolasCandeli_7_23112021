@@ -9,4 +9,13 @@ export class Utilitaire {
   static harmonise(texte) {
     return texte.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   }
+
+  // N'affiche ':' après un ingrédient que seulement si sa quantité est définie
+  static afficheDeuxPoints(el) {
+    if (el.quantity === undefined) {
+      return '';
+    } else {
+      return ': ';
+    }
+  }
 }

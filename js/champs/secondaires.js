@@ -27,7 +27,7 @@ export class ChampsSecondaires {
   constructor(bouton, label, formulaire, champs, liste) {
     this.bouton = bouton, /* Bouton d'ouverture */
     this.label = label, /* Label de fermeture */
-    this.formulaire = formulaire, /* Formulaire contenant le champs et la liste d'ingrédients, d'appareils ou d'ustenciles */
+    this.formulaire = formulaire, /* Formulaire contenant le champs et la liste d'ingrédients, d'appareils ou d'ustensiles */
     this.champs = champs, /* Champs de saisie */
     this.liste = liste /* Liste contenant les <li> à remplir */
   }
@@ -59,7 +59,7 @@ export class ChampsSecondaires {
       this.champs.value = ''; /* Vidage du champs secondaire */
       MotsCles.ajoute(evt, this.constructor.choisitListe(this.champs)); /* Ajout du bouton dans le DOM et du mot-clé dans la liste de mots-clés */
       recherche.filtreRecettesParMotsCles(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots-clés */
-      Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, d'appareils et d'ustenciles */
+      Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, d'appareils et d'ustensiles */
       Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots-clés dans les 3 formulaires */
     });
   }
@@ -77,12 +77,12 @@ export class ChampsSecondaires {
     conteneurDeMotsCles.addEventListener('click', (evt) => { /* Lors d'un cliquage sur le conteneur de mots-clés ... */
       MotsCles.supprime(evt);  /* Suppression du bouton dans le DOM et du mot-clé dans la liste de mots-clés */
       recherche.filtreRecettesParMotsCles(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots-clés */
-      Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, d'appareils et d'ustenciles */
+      Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, d'appareils et d'ustensiles */
       Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots-clés dans les 3 formulaires */
     });
   }
 
-  // Sélectionne la liste (d'ingrédients, d'appareils ou d'ustenciles) correspondant au champs
+  // Sélectionne la liste (d'ingrédients, d'appareils ou d'ustensiles) correspondant au champs
   static choisitListe(champs) {
     if (champs.id === 'rech-ingr') {
       return ingredientsFiltres;
