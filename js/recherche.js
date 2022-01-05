@@ -22,7 +22,7 @@ export class Recherche {
   // Filtre les recettes correspondant à la valeur du champs (affiche les recettes et les copie dans "recettesFiltreesParChampsPrincipal")
   filtreRecettesParChampsPrincipal(recettes) {
     const entree =  Utilitaire.harmonise(this.champs.value);
-  
+   console.log('entree', entree.length);
     // // Si le champs est composé d'au moins 3 caractères et qu'aucun mot-clé n'a été sélectionné ...
     // if ((entree.length >= 3) && (motsClesChoisis.length === 0)) {
     //   this.conteneur.innerHTML = '';
@@ -56,7 +56,7 @@ export class Recherche {
       // Si la liste de mots-clés est vide ...
       if (motsClesChoisis.length === 0) {
         this.conteneur.innerHTML = '';
-        recettesFiltreesParChampsPrincipal = recettes.filter(recette => this.constructor.filtre(recette, ''));
+        recettesFiltreesParChampsPrincipal = recettes.filter(recette => this.constructor.filtre(recette, entree));
       // Si la liste de mots-clés n'est pas vide ...
       } else {
       // recettesFiltreesParChampsPrincipal = recettes.filter(recette => recette.resume.includes(entree));

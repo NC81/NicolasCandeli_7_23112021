@@ -24,7 +24,7 @@ export class Affichage {
       nouveauArticle.innerHTML = `<img src="https://via.placeholder.com/150/C7BEBE?text=+" alt="" />
                                   <div class="plat-intro">
                                   <h2>${recette.name}</h2>
-                                  <div><span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">${recette.time}</span></div>
+                                  <div><span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">${recette.time} min</span></div>
                                   </div>
                                   <div class="plat-recette"><ul class="plat-recette__liste"></ul>
                                   <p class="plat-recette__descr">${recette.description}</p>

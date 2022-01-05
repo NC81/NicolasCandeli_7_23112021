@@ -1,11 +1,18 @@
 .plat {
+  flex: 1 350px;
   max-width: 380px;
   height: 364px;
   background-color: $clr-sec;
   color: black;
   border-radius: 5px;
   overflow: hidden;
-  margin: 25px;
+  margin: 25px 0;
+  @include lap-max {
+    max-width: 49%;
+  }
+  @include mob-max {
+    max-width: 100%;
+  }
   img {
     display: block;
     width: 100%;
@@ -14,10 +21,19 @@
   &-intro {
     display: flex;
     justify-content: space-between;
-    padding: 20px 20px 16px 20px;
+    padding: 16px 20px 16px 20px;
+    h2 {
+      line-height: 19px;
+      width: calc(100% - 100px);
+      @include ellipse(2, 19px);
+    }
+    div:nth-child(2) {
+      width: 100px;
+      text-align: right;
+    }
     &__icone {
       font-size: 20px;
-      margin-right: 5px;
+      margin-right: 7px;
     }
     &__duree {
       font-size: 1.125em; 
@@ -27,10 +43,22 @@
   &-recette {
     display: flex;
     font-size: 0.75em;
-    padding: 0 18px;
+    padding: 0 17px 0 20px;
+    gap: 3%;
     &__liste {
       line-height: 14.4px;
       flex: 1;
+      @include ellipse(7, 14.4px);
+      &:hover, &:focus {
+        @include barre;
+       }
+      li {
+        display:inline;
+        &::after { 
+          content: '\A'; 
+          white-space: pre;
+        }
+      }
     }
     &__ingr {
       font-weight: bold;
@@ -39,10 +67,11 @@
       font-family: 'Roboto', sans-serif;
       line-height: 13px;
       flex: 1;
-      display: -webkit-box;
-      -webkit-line-clamp: 8;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      padding-right: 3px;
+      @include ellipse(8, 13px);
+      &:hover, &:focus {
+        @include barre;
+      }
     }
   }
 }
