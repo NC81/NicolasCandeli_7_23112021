@@ -1,0 +1,54 @@
+// Animations
+.secouage { /* Appliquée au message d'alerte (recherche infructueuse) */
+  animation: secouage 50ms 8 alternate;
+}
+
+.apparition { /* Appliquée aux formulaires */
+  animation: apparition 200ms forwards;
+}
+
+.aggrandissement { /* Appliquée aux boutons ouvrant les champs avancés */
+  animation: aggrandissement 200ms forwards;
+}
+
+.reduction { /* Appliquée aux boutons ouvrant les champs avancés */
+  animation: reduction 100ms both;
+}
+
+@keyframes apparition {
+  from {
+    visibility: visible;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+	opacity: 1;
+  }
+}
+
+@keyframes aggrandissement {
+  from {
+    width: 170px;
+  }
+  to {
+    width: 667px;
+  }
+}
+
+@keyframes reduction {
+  from {
+    width: 667px;
+  }
+  to {
+    width: 170px;
+  }
+}
+
+@keyframes secouage {
+  from {
+    transform: rotate(.35deg);
+  }
+  to {
+  	transform: rotate(-.35deg);
+  }
+}

@@ -3,20 +3,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 2%;
-  &__mess {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: 25px;
-    padding: 10px;
-    line-height: 30px;
-    border: 3px solid $clr-pri;
-    border-radius: 5px;
-    .fa-times-circle {
-      font-size: 20px;
-      line-height: 30px;
-    }
-  }
   &::after {
     content: '';
     flex: 1 350px;

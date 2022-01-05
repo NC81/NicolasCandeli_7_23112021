@@ -24,25 +24,3 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-// Affiche la barre de défilement
-@mixin barre {
-  display: block;
-  overflow: auto;
-  // Firefox
-  scrollbar-width: thin;
-  scrollbar-color: #C7BEBE #F5F5F5;
-  // Chrome, Edge et Safari
-  &::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #F5F5F5;
-  }
-  &::-webkit-scrollbar {
-    width: 8px;
-    background-color: #F5F5F5;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #C7BEBE;
-  }
-}

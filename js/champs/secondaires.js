@@ -35,19 +35,22 @@ export class ChampsSecondaires {
   // Contrôle l'ouverture et la fermeture des champs de recherche
   ouvreFormulaire() {
     this.bouton.addEventListener("click", () => { /* Lors d'un cliquage sur le bouton d'ouverture ... */
-      this.formulaire.style.display = "block"; /*  Ouvre le formulaire */
-      bloqueur.style.display = "block"; /* Ouvre le bloqueur recouvrant le reste de la page */
+      this.bouton.classList.remove('reduction'); 
+      this.bouton.classList.add('aggrandissement'); /*  Aggrandissement du bouton (animation) */
+      this.formulaire.classList.add('apparition'); /*  Ouverture du formulaire (animation) */
+      bloqueur.style.display = "block"; /* Ouverture du bloqueur recouvrant le reste de la page */
       this.bouton.setAttribute('aria-expanded', 'true');
     });
     this.label.addEventListener("click", (evt) => { /* Lors d'un cliquage sur le label ... */
       evt.preventDefault();
-      this.formulaire.style.display = "none"; /* Ferme le formulaire */
-      bloqueur.style.display = "none"; /* Ferme le bloqueur */
+      this.bouton.classList.replace('aggrandissement', 'reduction'); /*  Réduction du bouton (animation) */
+      this.formulaire.classList.remove('apparition');; /* Fermeture du formulaire (animation) */
+      bloqueur.style.display = "none"; /* Fermeture du bloqueur */
       this.bouton.setAttribute('aria-expanded', 'false');
     });
     bloqueur.addEventListener('click', () => { /* Lors d'un cliquage sur le bloqueur ... */
       if (this.bouton.getAttribute('aria-expanded') === 'true') {
-        this.label.click(); /* Ferme le formulaire ouvert */
+        this.label.click(); /* Fermeture du formulaire ouvert */
       }
     });
   }

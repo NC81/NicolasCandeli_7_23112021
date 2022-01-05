@@ -15,11 +15,13 @@
   }
   &__categ {
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 577px;
-    max-width: 100%;
-    gap: 3%;
+    @include lap-max {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 577px;
+      max-width: 100%;
+      gap: 3%;
+    }
   }
 }

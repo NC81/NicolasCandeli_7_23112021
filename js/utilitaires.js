@@ -1,3 +1,5 @@
+const gale = document.querySelector('.galerie');
+
 // Classe comportant les méthodes harmonisant les chaînes de caractères
 export class Utilitaire {
   // Transforme la première lettre en majuscule et le reste en minucules
@@ -17,5 +19,9 @@ export class Utilitaire {
     } else {
       return ': ';
     }
+  }
+
+  static test() {
+    const lines = (str.match(/\n/g) || '').length + 1;
   }
 }
