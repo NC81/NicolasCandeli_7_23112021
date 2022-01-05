@@ -5,21 +5,21 @@
         <!-- Meta tags -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <!-- Titre -->
         <title>Les petits plats - Trouvez votre recette de cuisine !</title>
         <!-- Style CSS -->
-        <link rel="stylesheet" href=".public/css/style.css" />
+        <link rel="stylesheet" href="./public/css/style.css" />
         <!-- Police et icones -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <script type="module" src="js/main.js"></script>
     </head>
 
     <body>
         <div class="bloc-page">
+            
             <!-- En-tête -->
             <header class="header">
                 <svg role="img" aria-describedby="titre" width="52" height="47" viewBox="0 0 52 47" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,17 +32,12 @@
                     <label for="rech-princ">
                         <span class="fas fa-search fa-2x"></span>
                     </label>
-                    <input type="search" id="rech-princ" name="rech-princ" placeholder="Rechercher un ingrédient, appareil, ustenciles ou une recette" />
+                    <input type="search" id="rech-princ" name="rech-princ" placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette" />
                 </form>
                 <!-- Navigation -->
                 <nav>
                     <!-- Bouton comportant la recherche en cours -->
-                    <div>
-                        <button class="btn-mini">
-                            <span class="btn-mini__cont">Coco</span>
-                            <span class="far fa-times-circle"></span>
-                        </button>
-                    </div>
+                    <div class="header__selec"></div>
                     <!-- Boutons ouvrant les formulaires de recherche par catégorie -->
                     <div class="header__categ">
                         <button class="btn btn--ingr" aria-label="Rechercher un ingrédient" aria-haspopup="menu" aria-controls="form-ingr" aria-expanded="false">
@@ -62,25 +57,31 @@
                         <form id="form-appa" class="form-categ form-categ--appa">
                             <label for="rech-appa"><span class="fas fa-chevron-up"></span></label>
                             <input type="search" id="rech-appa" name="rech-appa" placeholder="Recherche un appareil" />
-                            <ul aria-label="Liste des appareils" class="form-categ__liste form-categ--ingr__liste">
+                            <ul aria-label="Liste des appareils" class="form-categ__liste form-categ--appa__liste">
                             </ul>
                         </form>
-                        <button class="btn btn--uste" aria-label="Rechercher un ustencile" aria-haspopup="menu" aria-controls="form-uste" aria-expanded="false">
+                        <button class="btn btn--uste" aria-label="Rechercher un ustensile" aria-haspopup="menu" aria-controls="form-uste" aria-expanded="false">
                             <span class="btn__cont">Ustenciles</span>
                             <span class="fas fa-chevron-down"></span>
                         </button>
                         <form id="form-uste" class="form-categ form-categ--uste">
                             <label for="rech-uste"><span class="fas fa-chevron-up"></span></label>
-                            <input type="search" id="rech-uste" name="rech-uste" placeholder="Recherche un ustencile" />
-                            <ul aria-label="Liste des ustenciles" class="form-categ__liste form-categ--ingr__liste">
+                            <input type="search" id="rech-uste" name="rech-uste" placeholder="Recherche un ustensile" />
+                            <ul aria-label="Liste des ustensiles" class="form-categ__liste form-categ--uste__liste">
                             </ul>
                         </form>
+                        <div class="bloqueur"></div>
                     </div>
                 </nav>
             </header>
+
             <!-- Galerie de plats -->
             <main class="galerie">
-                <article class="plat">
+                <!-- <aside class="galerie__mess">
+                    <span>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>
+                    <span class="far fa-times-circle"></span>
+                </aside> -->
+                <!-- <article class="plat">
                     <img src="https://via.placeholder.com/150/C7BEBE?text=+" alt="" />
                     <div class="plat-intro">
                         <h2>Limonade de Coco</h2>
@@ -100,13 +101,10 @@
                             Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
                         </p>
                     </div>
-                </article>
-
+                </article> -->
             </main>
 
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
     </body>
 
 </html>

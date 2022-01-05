@@ -1,30 +1,50 @@
 .btn {
   position: relative;
-  width: 170px;
+  flex: 1 150px;
+  max-width: 170px;
   height: 69px;
   border: none;
   color: white;
   font-size: 1.125em;
-  margin: 15px 20px 0 0;
+  margin: 20px 0 0 0;
   padding-left: 20px;
   text-align: left;
+  @include mob-max {
+    flex: 1 135px;
+    height: 45px;
+    padding-left: 10px;
+    max-width: 48.5%;
+  }
   &__cont {
-    font-weight: 700;
+    font-weight: bold;
   }
   &--ingr {
     background-color: $clr-btn1;
+    &:hover {
+      background-color: darken($clr-btn1, 10%);
+    }
   }
   &--appa {
     background-color: $clr-btn2;
+    &:hover {
+      background-color: darken($clr-btn2, 10%);
+    }
   }
   &--uste {
     background-color: $clr-btn3;
+    &:hover {
+      background-color: darken($clr-btn3, 10%);
+    }
   }
   .fa-chevron-down {
     position: absolute;
     top: 0;
     right: 20px;
     line-height: 69px;
+    @include mob-max {
+      right: 10px;
+      line-height: 45px;
+    }
   }
 }
 
@@ -33,16 +53,19 @@
   height: 37px;
   font-size: 0.875em;
   color: white;
-  background-color: $clr-btn1;
   border: none;
   padding: 0 55px 0 20px;
-  margin-top: 25px;
+  margin: 25px 15px 0 0;
   &__cont {
-      font-weight: 700;
+    font-weight: bold;
   }
   .fa-times-circle {
     position: absolute;
     font-size: 20px;
     right: 22px;
+    cursor: pointer;
+    &:hover {
+      font-weight: bold;
+    }
   }
 }

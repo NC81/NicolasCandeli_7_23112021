@@ -1,0 +1,48 @@
+// Responsive (mobile, tablette, laptop)
+@mixin mob-max {
+  @media screen and (max-width : map-get($bkpt, mobile)) {
+    @content;
+  }
+}
+@mixin tab-max {
+  @media screen and (max-width : map-get($bkpt, tablette)) {
+    @content;
+  }
+}
+@mixin lap-max {
+  @media screen and (max-width : map-get($bkpt, laptop)) {
+    @content;
+  }
+}
+
+// Crée une ellipse après le nombre de lignes indiqués et détermine une hauteur maximale du conteneur
+@mixin ellipse($lignes, $line-height) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lignes;
+  -webkit-box-orient: vertical;
+  max-height: $lignes * $line-height;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Affiche la barre de défilement
+@mixin barre {
+  display: block;
+  overflow: auto;
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: #C7BEBE #F5F5F5;
+  // Chrome, Edge et Safari
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #C7BEBE;
+  }
+}

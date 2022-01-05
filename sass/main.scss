@@ -1,4 +1,5 @@
 @import "./utils/variables";
+@import "./utils/mixins";
 
 @import "./base/base";
 
@@ -6,6 +7,7 @@
 @import "./layout/bloc-page";
 @import "./layout/galerie";
 @import "./layout/formulaires";
+@import "./layout/bloqueur";
 
 @import "./components/boutons";
 @import "./components/plat";
