@@ -10,12 +10,12 @@
 }
 
 .aggrandissement {
-  /* Appliquée aux boutons ouvrant les champs avancés */
+  /* Appliquée aux boutons ouvrant les formulaires */
   animation: aggrandissement 200ms forwards;
 }
 
 .reduction {
-  /* Appliquée aux boutons ouvrant les champs avancés */
+  /* Appliquée aux boutons ouvrant les formulaires */
   animation: reduction 100ms both;
 }
 
@@ -470,7 +470,7 @@ button {
   text-overflow: ellipsis;
 }
 
-.tooltip {
+.info-bulle {
   position: absolute;
   width: auto;
   max-width: 96%;
@@ -484,12 +484,12 @@ button {
   visibility: hidden;
   z-index: 1;
 }
-.tooltip::before {
+.info-bulle::before {
   /* Texte */
   content: attr(data-titre);
-  /* Titre enregistré lors de l'affichage de la recette */
+  /* Nom enregistré lors de l'affichage de la recette */
 }
-.tooltip::after {
+.info-bulle::after {
   /* Flèche placée sous le bloc */
   content: "";
   position: absolute;

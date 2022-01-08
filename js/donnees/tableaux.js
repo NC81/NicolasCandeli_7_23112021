@@ -19,7 +19,7 @@ export class Tableau {
     // Remplissage de la liste
     recettesNonFiltrees = this.json
                          .slice(0) /* Copie de la liste json */
-                         .sort((a, b) => a.name > b.name ? 1 : -1) /* Tri par noms de recettes */
+                         .sort((a, b) => a.name > b.name ? 1 : -1) /* Tri par nom de recettes */
     
     // Modification des propriétés de chaque recette pour faciliter la recherche
     recettesNonFiltrees.map(recette =>  {
@@ -53,28 +53,16 @@ export class Tableau {
   // Crée liste d'objets (ingrédients, appareils, ustensiles) à partir d'une liste de recette
   static creeListeObjets(recette, type, couleur, tableau) {
     for (let elementRecette of recette[type]) {
-    const nouveauMotCle = new MotsCles(elementRecette, couleur, type); 
-    let trouve = false;
-      for (let elementTableau of tableau) {
-        if(Utilitaire.harmonise(elementRecette) === Utilitaire.harmonise(elementTableau.nom)) {
-          trouve = true;
-        }
-      }
-      if (!trouve) {
+    const nouveauMotCle = new MotsCles(elementRecette, couleur, type);
+
+      // Si la liste d'objets ne contient pas le mot-clé ...
+      if (!Utilitaire.harmoniseListe(tableau.map(el => el.nom)).includes(Utilitaire.harmonise(elementRecette))) {
         tableau.push(nouveauMotCle.creeMotCle()); /* Ajoute le mot-clé dans le tableau dédié avec 3 propriétés (nom, couleur, type) */
       }
     }
+    // console.log('tablo', tableau);
     tableau.sort((a, b) => Utilitaire.harmonise(a.nom) > Utilitaire.harmonise(b.nom) ? 1 : -1);
   }
-  
-  // static creeListeObjets(recette, type, tableau) {
-  //   for (let element of recette[type]) {
-  //     if (!tableau.includes(element)) {
-  //       tableau.push(element);
-  //     }
-  //   }
-  //   tableau.sort((a, b) => Utilitaire.harmonise(a) > Utilitaire.harmonise(b) ? 1 : -1);
-  // }
 
   // Réduit la liste de recettes préalablement filtrées par le champs principal (même vide)
   static reduitListeRecettesParMotCle(element, tableau, type) {
@@ -85,20 +73,9 @@ export class Tableau {
     }
   }
 
-  // // Réduit la liste de recettes préalablement filtrées par le champs principal (même vide)
-  // static reduitListeRecettesParMotCle(element, tableau, couleur, type) {
-  //   if (element.couleur === couleur) {
-  //     for (let i = tableau.length - 1; i >= 0; i--) {
-  //       if (!tableau[i][type].includes(element.texte)) {
-  //         tableau.splice(i, 1);
-  //       }
-  //     }
-  //   }
-  // }
-
   // Crée la liste de mots-clés à afficher
   static creeListeMotClesParChamps(evt, tableau) {
-    console.log('tableau mots', tableau);
+    // console.log('tableau mots', tableau);
     motsClesFiltres = [];
     const entree = Utilitaire.harmonise(evt.target.value);
     for (let element of tableau) {
@@ -106,7 +83,7 @@ export class Tableau {
         motsClesFiltres.push(element);
       }
     }
-    console.log('mots', motsClesFiltres);
+    // console.log('mots', motsClesFiltres);
   }
 }
 export const tableau = new Tableau();

@@ -31,7 +31,7 @@ export class MotsCles {
   
   // Ajout de mot-clé
   static ajoute(evt, liste) {
-    // Délégation d'évènement : si le contenu de la cible correspond à un élément de la liste générale de mots-clés et si la liste de mot-clés cliqués ne contient pas le mot-clé ciblé ...
+    // Délégation d'évènement : si le contenu de la cible correspond à un élément de la liste générale de mots-clés et si la liste de mot-clés ne contient pas le mot-clé cliqué ...
     let listeElementCible = liste.filter(el => el.nom === evt.target.textContent);
     if ((evt.target.textContent === listeElementCible[0].nom) && (!motsClesChoisis.map(mot => mot.nom).includes(evt.target.textContent))) {
       motsClesChoisis.push(listeElementCible[0]); /* Ajout du mot-clé dans la liste dédiée */

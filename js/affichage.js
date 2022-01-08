@@ -22,7 +22,7 @@ export class Affichage {
       fragment.appendChild(nouvelArticle);
       nouvelArticle.classList.add('plat');
       nouvelArticle.innerHTML = `<img src="https://via.placeholder.com/150/C7BEBE?text=+" alt="" />
-                                 <div class="tooltip" data-titre="${recette.name}" class="tooltiptext"></div>
+                                 <div class="info-bulle" data-titre="${recette.name}" class="tooltiptext"></div>
                                  <div class="plat-intro">
                                    <h2>${recette.name}</h2>
                                    <div><span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">${recette.time} min</span></div>
@@ -42,14 +42,14 @@ export class Affichage {
     // Affichage de la recette
     this.conteneur.appendChild(fragment);
 
-    // Affichage du tooltip
+    // Affichage de l'info-bulle
     const largeurNormaleTitre = nouvelArticle.children[2].children[0].offsetWidth; /* Largeur du titre visible (px) */
     const largeurTotaleTitre = nouvelArticle.children[2].children[0].scrollWidth; /* Largeur totale (visible et non visible) du titre (px) */
     const titre = nouvelArticle.children[2].children[0];
-    const tooltip = nouvelArticle.children[1];
+    const infoBulle = nouvelArticle.children[1];
     // Si le titre déborde ...
     if (largeurNormaleTitre < largeurTotaleTitre) {
-      this.inscritTooltip(titre, tooltip); /* Activation des évènements d'affichage du tooltip */
+      this.inscritTooltip(titre, infoBulle); /* Activation des évènements d'affichage de l'info-bulle */
     }
 
     // Affichage du bouton d'extension sur les recettes dont le contenu déborde
@@ -100,14 +100,14 @@ export class Affichage {
     });
   }
 
-  // Affiche le tooltip au survol
-  inscritTooltip(titre, tooltip) {
+  // Affiche l'info-bulle au survol
+  inscritTooltip(titre, infoBulle) {
     titre.style.cursor = 'pointer';
     titre.addEventListener('mouseover', () => {
-      tooltip.style.visibility = 'visible';
+      infoBulle.style.visibility = 'visible';
     });
     titre.addEventListener('mouseout', () => {
-      tooltip.style.visibility = 'hidden';
+      infoBulle.style.visibility = 'hidden';
     });
   }
 

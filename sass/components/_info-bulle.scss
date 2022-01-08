@@ -1,5 +1,5 @@
-// Tooltip affichant le nom de la recette lors d'un survol de titre débordant son conteneur
-.tooltip {
+// Info-bulle affichant le nom de la recette lors d'un survol du titre
+.info-bulle {
   position: absolute;
   width: auto;
   max-width: 96%;
@@ -13,7 +13,7 @@
   visibility: hidden;
   z-index: 1;
   &::before { /* Texte */
-    content: attr(data-titre); /* Titre enregistré lors de l'affichage de la recette */
+    content: attr(data-titre); /* Nom enregistré lors de l'affichage de la recette */
   }
   &::after { /* Flèche placée sous le bloc */
     content: '';

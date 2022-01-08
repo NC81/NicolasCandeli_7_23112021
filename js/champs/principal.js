@@ -1,5 +1,5 @@
 import { champsPrincipal, recettesFiltreesParChampsPrincipal, recettesFiltreesParMotsCles, recherche } from '../recherche.js';
-import { Affichage, affichage } from '../affichage.js';
+import { Affichage } from '../affichage.js';
 import { Tableau } from '../donnees/tableaux.js';
 import { motsClesChoisis } from '../mots_cles.js';
 
@@ -8,15 +8,9 @@ export class ChampsPrincipal {
   // Filtre les recettes et les mots-clés par le champs principal
   static recherche(liste) {
     champsPrincipal.addEventListener('input', () => { /* Lors d'une modification du champs ... */
-      recherche.filtreRecettesParChampsPrincipal(liste); /* Filtrage des recettes (création d'une liste de recettes et affichage */
-      // Si la recherche est infructueuse ...
-      if (recettesFiltreesParChampsPrincipal.length === 0) {
-        affichage.inscritMessage(); /* Affichage du message d'alerte */
-      // Sinon ...
-      } else {
-        Tableau.creeListesMotsCles(this.choisitListe(motsClesChoisis)); /* Création des listes d'ingrédients, d'appareils et d'ustensiles */
-        Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots-clés dans les 3 formulaires */
-      }
+      recherche.filtreRecettesParChampsPrincipal(liste); /* Filtrage des recettes (création d'une liste et affichage des recettes) */
+      Tableau.creeListesMotsCles(this.choisitListe(motsClesChoisis)); /* Création des listes d'ingrédients, d'appareils et d'ustensiles */
+      Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots-clés dans les 3 formulaires */
     });
   }
 

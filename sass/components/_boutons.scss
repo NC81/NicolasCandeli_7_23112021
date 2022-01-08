@@ -1,3 +1,4 @@
+// Bouton ouvrant les champs avancés (ingrédients, appareils, ustensiles)
 .btn {
   position: relative;
   width: 170px;
@@ -52,6 +53,7 @@
   }
 }
 
+// Bouton de mots-clés affiché lors d'une sélection
 .btn-mini {
   position: relative;
   height: 37px;
@@ -74,6 +76,7 @@
   }
 }
 
+// Bouton d'extension des recettes dont le contenu déborde
 .btn-ext {
   position: absolute;
   width: 100%;

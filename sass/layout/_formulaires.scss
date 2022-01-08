@@ -1,4 +1,4 @@
-// Barre de recherche principale
+// Formulaires englobant les champs avancés et les listes (ingrédients, appareils, ustensiles)
 .form-princ {
     position: relative;
   label {
@@ -29,6 +29,7 @@
 
 // Formulaires de recherche par catégorie
 .form-categ {
+  // display: none;
   visibility: hidden;
   position: absolute;
   top: 20px;
