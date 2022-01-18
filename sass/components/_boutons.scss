@@ -1,13 +1,25 @@
+// Bouton ouvrant les champs avancés (ingrédients, appareils, ustensiles)
 .btn {
   position: relative;
   width: 170px;
   height: 69px;
+  font-size: 1.125em;
+  margin: 20px 20px 0 0;
+  text-align: left;
   border: none;
   color: white;
-  font-size: 1.125em;
-  margin: 15px 20px 0 0;
   padding-left: 20px;
-  text-align: left;
+  @include lap-max {
+    margin-right: 0;
+    flex: 1 150px;
+    max-width: 170px;
+  }
+  @include mob-max {
+    flex: 1 135px;
+    height: 45px;
+    padding-left: 10px;
+    max-width: 48.5%;
+  }
   &__cont {
     font-weight: bold;
   }
@@ -34,9 +46,14 @@
     top: 0;
     right: 20px;
     line-height: 69px;
+    @include mob-max {
+      right: 10px;
+      line-height: 45px;
+    }
   }
 }
 
+// Bouton de mots-clés affiché lors d'une sélection
 .btn-mini {
   position: relative;
   height: 37px;
@@ -55,6 +72,35 @@
     cursor: pointer;
     &:hover {
       font-weight: bold;
+    }
+  }
+}
+
+// Bouton d'extension des recettes dont le contenu déborde
+.btn-ext {
+  position: absolute;
+  width: 100%;
+  height: 16px;
+  padding: 0;
+  border-radius: 0 0 5px 5px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  visibility: hidden;
+  background-color: transparent;
+  color: darken($clr-sec, 60%);
+  &[data-visible="true"] {
+    visibility: visible;
+  }
+  &[data-ouvert="true"] {
+    color: white;
+    background-color: darken($clr-sec, 10%);
+  }
+  &[data-ouvert="false"] {
+    &:hover, &:active {
+      color: white;
+      background-color: darken($clr-sec, 10%);
     }
   }
 }

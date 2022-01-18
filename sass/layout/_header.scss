@@ -1,6 +1,10 @@
+// En-tête englobant le titre, le champs principal, les boutons et les formulaires
 .header {
   margin-top: 42px;
   text-align: center;
+  @include mob-max {
+    margin-top: 25px;
+  }
   h1 {
     font-family: 'DM Sans', sans-serif;
     font-size: 2.25em;
@@ -12,5 +16,13 @@
   }
   &__categ {
     position: relative;
+    @include lap-max {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 577px;
+      max-width: 100%;
+      gap: 3%;
+    }
   }
 }

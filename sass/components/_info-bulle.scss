@@ -1,0 +1,28 @@
+// Info-bulle affichant le nom de la recette lors d'un survol du titre
+.info-bulle {
+  position: absolute;
+  width: auto;
+  max-width: 96%;
+  line-height: 18px;
+  padding: 5px;
+  background-color: white;
+  left: 2%;
+  bottom: 175px;
+  border: 3px solid darken($clr-sec, 40%);
+  border-radius: 5px;
+  visibility: hidden;
+  z-index: 1;
+  &::before { /* Texte */
+    content: attr(data-titre); /* Nom enregistré lors de l'affichage de la recette */
+  }
+  &::after { /* Flèche placée sous le bloc */
+    content: '';
+    position: absolute;
+    top: calc(100% + 3px);
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: darken($clr-sec, 40%) transparent transparent transparent;
+  }
+}

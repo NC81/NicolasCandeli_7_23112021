@@ -1,11 +1,11 @@
-// Barre de recherche principale
+// Formulaires englobant les champs avancés et les listes (ingrédients, appareils, ustensiles)
 .form-princ {
-    position: relative;
+  position: relative;
   label {
     display: inline;
   }
   input {
-    padding: 23px 16px 24px 22px;
+    padding: 23px 50px 24px 22px;
     width: 100%;
     height: 69px;
     font-size: 1.125em;
@@ -16,6 +16,9 @@
       color: black;
       opacity: .25;
     }
+    &:placeholder-shown {
+      text-overflow: ellipsis;
+    }
   }
   .fa-search {
     position: absolute;
@@ -24,17 +27,22 @@
   }
 }
 
-// Barres de recherche par catégorie
+// Formulaires de recherche par catégorie
 .form-categ {
-  display: none;
+  // display: none;
+  visibility: hidden;
   position: absolute;
-  top: 15px;
+  top: 20px;
+  left: 0;
   width: 667px;
   font-size: 1.125em;
   color: white;
   border-radius: 5px;
   padding: 0 19px 10px 19px;
   z-index: 2;
+  @include tab-max {
+    width: 100%;
+  }
   label {
     position: absolute;
     right: 20px;
@@ -68,15 +76,20 @@
       text-align: left;
       width: 23%;
       line-height: 31.8px;
+      flex: 1 180px;
       cursor: pointer;
       &:hover {
         font-weight: bold;
       }
     }
+    &::after {
+      content: '';
+      flex: 1 180px;
+      height: 0;
+    }
   }
   &--ingr {
     background-color: $clr-btn1;
-    left: 0;
     input {
       background-color: $clr-btn1;
     }
@@ -84,13 +97,19 @@
   &--appa {
     background-color: $clr-btn2;
     left: 193px;
+    @include lap-max {
+      left: 0;
+    }
     input {
       background-color: $clr-btn2;
     }
   }
   &--uste {
     background-color: $clr-btn3;
-    left: 387px;
+    left: 386px;
+    @include lap-max {
+      left: 0;
+    }
     input {
       background-color: $clr-btn3;
     }

@@ -1,4 +1,6 @@
 @import "./utils/variables";
+@import "./utils/mixins";
+@import "./utils/keyframes";
 
 @import "./base/base";
 
@@ -10,3 +12,5 @@
 
 @import "./components/boutons";
 @import "./components/plat";
+@import "./components/info-bulle";
+@import "./components/alerte";
