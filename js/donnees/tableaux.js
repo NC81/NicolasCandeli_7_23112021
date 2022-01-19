@@ -6,7 +6,7 @@ import { MotsCles } from '../mots_cles.js';
 export let recettesNonFiltrees = []; /* Recettes tirées des données json */
 export let ingredientsFiltres; /* Ingrédients compris dans les recettes triées */
 export let appareilsFiltres; /* Appareils compris dans les recettes triées */
-export let ustencilesFiltres; /* Ustenciles compris dans les recettes triées */
+export let ustensilesFiltres; /* Ustenciles compris dans les recettes triées */
 export let motsClesFiltres; /* Mots clés filtrés par le remplissage du champs secondaire */
 
 // Classe comportant les méthodes générant des données sous forme de liste
@@ -24,12 +24,12 @@ export class Tableau {
     // Modification des propriétés de chaque recette pour faciliter la recherche
     recettesNonFiltrees.map(recette =>  {
       // Ajustemement des caractères de tous les éléments et création d'un tableau d'appareils
-      recette.pureIngredients = recette.ingredients.map(portion => Utilitaire.ajusteTaille(portion.ingredient))
+      recette.aliments = recette.ingredients.map(portion => Utilitaire.ajusteTaille(portion.ingredient))
       recette.ustensils = recette.ustensils.map(ustensile => Utilitaire.ajusteTaille(ustensile))
-      recette.appliance = Utilitaire.ajusteTaille(recette.appliance).split('  ');
+      recette.appliance = Utilitaire.ajusteTaille(recette.appliance).split();
         
       // Ajout d'une propriété contenant une chaîne de tous les mots ciblés par la recherche principale 
-      const resume = `${recette.name} ${recette.pureIngredients} ${recette.appliance} ${recette.ustensils} ${recette.description}`;
+      const resume = `${recette.name} ${recette.aliments} ${recette.appliance} ${recette.ustensils} ${recette.description}`;
       recette.resume = Utilitaire.harmonise(resume);
     })
     console.log('recettes non filtrées', recettesNonFiltrees);
@@ -39,35 +39,35 @@ export class Tableau {
   static creeListesMotsCles(recettes) {
     ingredientsFiltres = [];
     appareilsFiltres = [];
-    ustencilesFiltres = [];
+    ustensilesFiltres = [];
 
     // Répartition des ingrédients, appareils et ustensiles dans leurs listes respectives pour chaque recette
     for (let recette of recettes) {
-      this.creeListeObjets(recette, 'pureIngredients', 'rgb(50, 130, 247)', ingredientsFiltres); /* Crée liste d'ingrédients */
+      this.creeListeObjets(recette, 'aliments', 'rgb(50, 130, 247)', ingredientsFiltres); /* Crée liste d'ingrédients */
       this.creeListeObjets(recette, 'appliance', 'rgb(104, 217, 164)', appareilsFiltres); /* Crée liste d'appareils */
-      this.creeListeObjets(recette, 'ustensils', 'rgb(237, 100, 84)', ustencilesFiltres); /* Crée liste d'ustensiles */
+      this.creeListeObjets(recette, 'ustensils', 'rgb(237, 100, 84)', ustensilesFiltres); /* Crée liste d'ustensiles */
     }
-    // console.log(ingredientsFiltres, appareilsFiltres, ustencilesFiltres);
+    // console.log(ingredientsFiltres, appareilsFiltres, ustensilesFiltres);
   }
 
   // Crée liste d'objets (ingrédients, appareils, ustensiles) à partir d'une liste de recette
   static creeListeObjets(recette, type, couleur, tableau) {
     for (let elementRecette of recette[type]) {
-    const nouveauMotCle = new MotsCles(elementRecette, couleur, type);
+      const nouveauMotCle = new MotsCles(elementRecette, couleur, type);
 
       // Si la liste d'objets ne contient pas le mot-clé ...
-      if (!Utilitaire.harmoniseListe(tableau.map(el => el.nom)).includes(Utilitaire.harmonise(elementRecette))) {
+      if (!Utilitaire.harmonise(tableau.map(el => el.nom)).includes(Utilitaire.harmonise(elementRecette))) {
         tableau.push(nouveauMotCle.creeMotCle()); /* Ajoute le mot-clé dans le tableau dédié avec 3 propriétés (nom, couleur, type) */
       }
     }
-    // console.log('tablo', tableau);
-    tableau.sort((a, b) => Utilitaire.harmonise(a.nom) > Utilitaire.harmonise(b.nom) ? 1 : -1);
+    // Tri les listes d'ingrédients, d'appareils et d'ustensils par noms
+    Utilitaire.triParNoms(tableau, 'nom');
   }
 
   // Réduit la liste de recettes préalablement filtrées par le champs principal (même vide)
   static reduitListeRecettesParMotCle(element, tableau, type) {
     for (let i = tableau.length - 1; i >= 0; i--) {
-        if (!tableau[i][type].map(el => Utilitaire.harmonise(el)).includes(Utilitaire.harmonise(element.nom))) {
+      if (!tableau[i][type].map(el => Utilitaire.harmonise(el)).includes(Utilitaire.harmonise(element.nom))) {
         tableau.splice(i, 1);
       }
     }
@@ -75,7 +75,6 @@ export class Tableau {
 
   // Crée la liste de mots-clés à afficher
   static creeListeMotClesParChamps(evt, tableau) {
-    // console.log('tableau mots', tableau);
     motsClesFiltres = [];
     const entree = Utilitaire.harmonise(evt.target.value);
     for (let element of tableau) {
@@ -83,7 +82,6 @@ export class Tableau {
         motsClesFiltres.push(element);
       }
     }
-    // console.log('mots', motsClesFiltres);
   }
 }
 export const tableau = new Tableau();

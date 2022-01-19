@@ -1,6 +1,6 @@
-import { Tableau, ingredientsFiltres, appareilsFiltres, ustencilesFiltres, motsClesFiltres } from '../donnees/tableaux.js';
+import { Tableau, ingredientsFiltres, appareilsFiltres, ustensilesFiltres, motsClesFiltres } from '../donnees/tableaux.js';
 import { MotsCles, motsClesChoisis } from '../mots_cles.js';
-import { recherche, recettesFiltreesParMotsCles } from '../recherche.js';
+import { recherche, recettesFiltreesParMotsCles } from '../recherches.js';
 import { Affichage } from '../affichage.js';
 
 // DOM
@@ -10,9 +10,9 @@ const barreUstenciles = document.querySelector('#rech-uste');
 const formulaireIngredients = document.querySelector('.form-categ--ingr');
 const formulaireAppareils = document.querySelector('.form-categ--appa');
 const formulaireUstenciles = document.querySelector('.form-categ--uste');
-const listeIngredients = document.querySelector('.form-categ--ingr__liste');
-const listeAppareils = document.querySelector('.form-categ--appa__liste');
-const listeUstenciles = document.querySelector('.form-categ--uste__liste');
+const conteneurIngredients = document.querySelector('.form-categ--ingr__liste');
+const conteneurAppareils = document.querySelector('.form-categ--appa__liste');
+const conteneurUstenciles = document.querySelector('.form-categ--uste__liste');
 const boutonIngredients = document.querySelector('.btn--ingr');
 const boutonAppareils = document.querySelector('.btn--appa');
 const boutonUstenciles = document.querySelector('.btn--uste');
@@ -55,22 +55,22 @@ export class ChampsSecondaires {
     });
   }
 
-  // Filtre les recettes et les mots-clés par le cliquage de mots-clés
+  // Filtre les recettes et les mots-clés par l'ajout de mots-clés au cliquage
   filtreRecettesParMotCle() {
     this.liste.addEventListener('click', (evt) => { /* Lors d'un cliquage dans le formulaire ... */
       this.label.click(); /* Fermeture du formulaire */
       this.champs.value = ''; /* Vidage du champs secondaire */
-      MotsCles.ajoute(evt, this.constructor.choisitListe(this.champs)); /* Ajout du bouton dans le DOM et du mot-clé dans la liste de mots-clés */
+      MotsCles.ajoute(evt, this.constructor.choisitListeObjets(this.champs)); /* Ajout du bouton dans le DOM et du mot-clé dans la liste de mots-clés */
       recherche.filtreRecettesParMotsCles(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots-clés */
       Tableau.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, d'appareils et d'ustensiles */
       Affichage.inscritMotsClesDansTroisFormulaires(); /* Affichage des mots-clés dans les 3 formulaires */
     });
   }
 
-  // Filtre les mots-clés dans les formulaires par le remplissage du champs secondaire
+  // Filtre les mots-clés dans les formulaires par le remplissage du champs secondaire 
   filtreMotsCles() {
     this.champs.addEventListener('input', (evt) => { /* Lors d'une modification du champs ... */
-      Tableau.creeListeMotClesParChamps(evt, this.constructor.choisitListe(this.champs)); /* Création de la liste de mots-clés à afficher selon l'entrée */
+      Tableau.creeListeMotClesParChamps(evt, this.constructor.choisitListeObjets(this.champs)); /* Création de la liste de mots-clés à afficher selon l'entrée */
       Affichage.inscritMotsClesParFormulaire(motsClesFiltres, this.liste); /* Affichage des mots-clés dans le formulaire correspondant */
     });
   }
@@ -86,7 +86,7 @@ export class ChampsSecondaires {
   }
 
   // Sélectionne la liste (d'ingrédients, d'appareils ou d'ustensiles) correspondant au champs
-  static choisitListe(champs) {
+  static choisitListeObjets(champs) {
     if (champs.id === 'rech-ingr') {
       return ingredientsFiltres;
     }
@@ -94,10 +94,10 @@ export class ChampsSecondaires {
       return appareilsFiltres;
     }
     else if (champs.id === 'rech-uste') {
-      return ustencilesFiltres;
+      return ustensilesFiltres;
     }
   }
 }
-export const champsIngredients = new ChampsSecondaires(boutonIngredients, labelIngredients, formulaireIngredients, barreIngredients, listeIngredients);
-export const champsAppareils = new ChampsSecondaires(boutonAppareils, labelAppareils, formulaireAppareils, barreAppareils, listeAppareils);
-export const champsUstenciles = new ChampsSecondaires(boutonUstenciles, labelUstenciles, formulaireUstenciles, barreUstenciles, listeUstenciles);
+export const champsIngredients = new ChampsSecondaires(boutonIngredients, labelIngredients, formulaireIngredients, barreIngredients, conteneurIngredients);
+export const champsAppareils = new ChampsSecondaires(boutonAppareils, labelAppareils, formulaireAppareils, barreAppareils, conteneurAppareils);
+export const champsUstenciles = new ChampsSecondaires(boutonUstenciles, labelUstenciles, formulaireUstenciles, barreUstenciles, conteneurUstenciles);

@@ -1,46 +1,58 @@
-import { ingredientsFiltres, appareilsFiltres, ustencilesFiltres } from './donnees/tableaux.js';
+import { ingredientsFiltres, appareilsFiltres, ustensilesFiltres } from './donnees/tableaux.js';
 import { Utilitaire } from './utilitaires.js';
+import { recherche, champsPrincipal } from './recherches.js';
 
 export const galerie = document.querySelector('.galerie');
 
 // DOM
-const listeIngredients = document.querySelector('.form-categ--ingr__liste');
-const listeAppareils = document.querySelector('.form-categ--appa__liste');
-const listeUstenciles = document.querySelector('.form-categ--uste__liste');
+const conteneurIngredients = document.querySelector('.form-categ--ingr__liste');
+const conteneurAppareils = document.querySelector('.form-categ--appa__liste');
+const conteneurUstenciles = document.querySelector('.form-categ--uste__liste');
 
 // Classe comportant les méthodes d'affichage de contenu
 export class Affichage {
-  constructor(conteneur = galerie) {
-    this.conteneur = conteneur
+  constructor(recette) {
+    this.recette = recette
+  }
+  
+  // Affiche les recettes correspondant à la recherche puis renvoie un booléen (pour la méthode filter)
+  filtre(chaine) {
+    // Pour chaque recette, si la valeur du champs est contenue dans la propriété "resume"...
+    if (this.recette.resume.includes(chaine)) {
+      this.inscritRecettes(); /* Affichage de la recette */
+      return true; /* Ajout de la recette à la liste "recettesFiltreesParChamps" */
+    } else {
+      return false;
+    }
   }
 
   // Affiche la recette filtrée
-  inscritRecettes(recette) {
+  inscritRecettes() {
     const fragment = document.createDocumentFragment()
       // Création de la recette
       const nouvelArticle = document.createElement('article');
       fragment.appendChild(nouvelArticle);
       nouvelArticle.classList.add('plat');
       nouvelArticle.innerHTML = `<img src="https://via.placeholder.com/150/C7BEBE?text=+" alt="" />
-                                 <div class="info-bulle" data-titre="${recette.name}" class="tooltiptext"></div>
+                                 <div class="info-bulle" data-titre="${this.recette.name}" class="tooltiptext"></div>
                                  <div class="plat-intro">
-                                   <h2>${recette.name}</h2>
-                                   <div><span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">${recette.time} min</span></div>
+                                   <h2>${this.recette.name}</h2>
+                                   <div><span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">${this.recette.time} min</span></div>
                                    <div></div>
                                  </div>
                                  <button class="btn-ext" data-ouvert="false"><i class="fas fa-chevron-down"></i></button>
                                  <div class="plat-recette">
                                    <ul class="plat-recette__liste"></ul>
-                                   <p class="plat-recette__descr">${recette.description}</p>
+                                   <p class="plat-recette__descr">${this.recette.description}</p>
                                  </div>`;
       // Génération d'ingrédients dans la recette
-      for (let portion of recette.ingredients) {
+      for (let portion of this.recette.ingredients) {
         const nouveauLi = document.createElement('li');
         nouvelArticle.children[4].children[0].appendChild(nouveauLi);
         nouveauLi.innerHTML = `<span class="plat-recette__ingr">${portion.ingredient}</span><span class="plat-recette__quant">${Utilitaire.afficheDeuxPoints(portion) + (portion.quantity ?? '')} ${portion.unit ?? ''}</span>`;
       }
     // Affichage de la recette
-    this.conteneur.appendChild(fragment);
+    galerie.appendChild(fragment);
 
     // Affichage de l'info-bulle
     const largeurNormaleTitre = nouvelArticle.children[2].children[0].offsetWidth; /* Largeur du titre visible (px) */
@@ -78,7 +90,6 @@ export class Affichage {
     article.children[3].dataset.visible = 'true'; /* Rend le bouton visible */
     // Lors d'un cliquage de bouton d'extension ...
     article.children[3].addEventListener('click', () => {
-      // console.log(normal, etendu);
       /* Si l'article n'a pas été déjà aggrandi ... */
       if (article.dataset.ouvert != 'true') {
         article.children[3].innerHTML = `<i class="fas fa-chevron-up"></i>`; /* Changement d'icône */
@@ -112,14 +123,15 @@ export class Affichage {
   }
 
   // Affiche un message en cas de recherche infructueuse
-  inscritMessage() {
-    this.conteneur.innerHTML = `<aside class="alerte secouage">
+  static inscritMessage() {
+    galerie.innerHTML = `<aside class="alerte secouage">
                                 <p>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>
                                 <span class="far fa-times-circle"></span>
                                 </aside>`;
     galerie.addEventListener('click', (evt) => {
-      if (evt.target.className === 'far fa-times-circle') {
-        this.conteneur.innerHTML = '';
+      if (evt.target.className === 'far fa-times-circle') { /* Lors d'un cliquage sur l'icône de fermeture ... */
+        champsPrincipal.value = ''; /* Vidage du champs principal */
+        recherche.filtreRecettesParChampsPrincipal(); /* Chargement de toutes les recettes */
       }
     });
   }
@@ -138,9 +150,8 @@ export class Affichage {
   
   // Affiche les mots-clés dans les 3 formulaires
   static inscritMotsClesDansTroisFormulaires() {
-    this.inscritMotsClesParFormulaire(ingredientsFiltres, listeIngredients);
-    this.inscritMotsClesParFormulaire(appareilsFiltres, listeAppareils);
-    this.inscritMotsClesParFormulaire(ustencilesFiltres, listeUstenciles);
+    this.inscritMotsClesParFormulaire(ingredientsFiltres, conteneurIngredients);
+    this.inscritMotsClesParFormulaire(appareilsFiltres, conteneurAppareils);
+    this.inscritMotsClesParFormulaire(ustensilesFiltres, conteneurUstenciles);
   }
 }
-export const affichage = new Affichage();
