@@ -1,5 +1,5 @@
-// Classe comportant les méthodes harmonisant les chaînes de caractères
-export class Utilitaire {
+// Classe comportant les méthodes utilitaires ciblant les chaînes de caractères
+export class Chaine {
   // Transforme la première lettre en majuscule et le reste en minucules
   static ajusteTaille(texte) {
   return texte.charAt(0).toUpperCase() + texte.toLowerCase().slice(1);
@@ -12,15 +12,6 @@ export class Utilitaire {
     } 
     if (typeof elements === 'object') {
       return elements.map(element => this.harmonise(element));
-    }
-  }
-
-  // N'affiche ':' après un ingrédient que seulement si sa quantité est définie
-  static afficheDeuxPoints(el) {
-    if (el.quantity === undefined) {
-      return '';
-    } else {
-      return ': ';
     }
   }
 
