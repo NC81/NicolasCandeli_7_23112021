@@ -66,7 +66,7 @@ export class ChampsAvance {
 
   // Filtre les recettes et les mots-clés par l'ajout de mots-clés au cliquage
   filtreRecettesParMotCle() {
-    this.conteneur.addEventListener('click', (evt) => { /* Lors d'un cliquage dans le formulaire ... */
+    this.conteneur.addEventListener('mousedown', (evt) => { /* Lors d'un cliquage dans le formulaire ... */
       this.label.click(); /* Fermeture du formulaire */
       this.champs.value = ''; /* Vidage du champs secondaire */
       MotsCles.ajoute(evt, this._liste); /* Ajout du bouton dans le DOM et du mot-clé dans la liste de mots-clés */
@@ -85,7 +85,7 @@ export class ChampsAvance {
   
   // Filtre les recettes et les mots-clés lors d'une suppression de mot-clé
   static supprimeMotCle() {
-    conteneurDeMotsCles.addEventListener('click', (evt) => { /* Lors d'un cliquage sur le conteneur de mots-clés ... */
+    conteneurDeMotsCles.addEventListener('mousedown', (evt) => { /* Lors d'un cliquage sur le conteneur de mots-clés ... */
       MotsCles.supprime(evt);  /* Suppression du bouton dans le DOM et du mot-clé dans la liste de mots-clés */
       RecettesParMotsCles.filtre(motsClesChoisis); /* Filtrage des recettes selon la nouvelle liste de mots-clés */
       this.creeListesMotsCles(recettesFiltreesParMotsCles); /* Création des listes d'ingrédients, d'appareils et d'ustensiles */

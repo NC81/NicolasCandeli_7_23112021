@@ -18,10 +18,10 @@ export let filtreRecettesParChamps = () => {
     if (motsClesChoisis.length === 0) {
       galerie.innerHTML = ''; /* Vidage du conteneur de recettes */
       recettesNonFiltrees.forEach(recette => new Affichage(recette).inscritRecettes()); /* Affichage de toutes les recettes non filtrées */
-      recettesFiltreesParChamps = recettesNonFiltrees.slice(0); /* Création de la liste de recettes filtrées */
+      recettesFiltreesParChamps = recettesNonFiltrees.slice(0); /* Affectation de la liste de recettes filtrées */
     // Si la liste de mots-clés n'est pas vide ...
     } else {
-    recettesFiltreesParChamps = recettesNonFiltrees.slice(0);
+    recettesFiltreesParChamps = recettesNonFiltrees.slice(0); /* Affectation de la liste de recettes filtrées */
     RecettesParMotsCles.filtre(motsClesChoisis); /* Appel du filtrage par mots-clés */
     }
     filtrageInitialActive = false; /* Désactivation du filtrage initial */
@@ -30,14 +30,14 @@ export let filtreRecettesParChamps = () => {
     // Si la liste de mots-clés est vide ...
     if (motsClesChoisis.length === 0) {
       galerie.innerHTML = ''; /* Vidage du conteneur de recettes */
-      recettesFiltreesParChamps = recettesNonFiltrees.filter(recette => new Affichage(recette).filtre(entree)); /* Création de la liste et affichage de recettes filtrées */
-        // Si la recherche est infructueuse ...
+      recettesFiltreesParChamps = recettesNonFiltrees.filter(recette => new Affichage(recette).filtre(entree)); /* Affectation de la liste de recettes filtrées et affichage des recettes */
+    // Si la recherche est infructueuse ...
     if (recettesFiltreesParChamps.length === 0) {
       Affichage.inscritMessage(); /* Affichage du message d'alerte */
     }
     // Si la liste de mots-clés n'est pas vide ...
     } else {
-    recettesFiltreesParChamps = recettesNonFiltrees.filter(recette => recette.resume.includes(entree)); /* Création de la liste de recettes filtrées */
+    recettesFiltreesParChamps = recettesNonFiltrees.filter(recette => recette.resume.includes(entree)); /* Affectation de la liste de recettes filtrées */
     RecettesParMotsCles.filtre(motsClesChoisis); /* Appel du filtrage par mots-clés */
     }
     filtrageInitialActive = true; /* Activation du filtrage initial */

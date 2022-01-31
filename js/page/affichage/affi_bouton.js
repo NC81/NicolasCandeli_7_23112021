@@ -2,7 +2,7 @@ import { Chaine } from '../../utilitaire/util_chaine.js';
 
 export let motsClesChoisis = []; /* Liste de mots-clés cliqués */
 
-//  DOM
+// DOM
 const conteneurDeMotsCles = document.querySelector('.header__selec');
 
 // Classe comportant la création de mots-clés et l'affichage des boutons
@@ -47,8 +47,8 @@ export class MotsCles {
   // Ajout de mot-clé
   static ajoute(evt, liste) {
     let listeElementCible = liste.filter(el => el.nom === evt.target.textContent);
-    // Délégation d'évènement : si la liste de mot-clés ne contient pas le mot-clé cliqué ...
-    if (!motsClesChoisis.map(mot => mot.nom).includes(evt.target.textContent)) {
+    // Délégation d'évènement : si un élément <li> est cliqué et si la liste de mot-clés ne contient pas le mot-clé cliqué ...
+    if ((evt.target.tagName === 'LI') && (!motsClesChoisis.map(mot => mot.nom).includes(evt.target.textContent))) {
       motsClesChoisis.push(listeElementCible[0]); /* Ajout du mot-clé dans la liste dédiée */
       this.creeBouton(listeElementCible[0]); /* Appel de la méthode de création de bouton */
     }

@@ -18,13 +18,7 @@ export class Chaine {
   // Tri les listes par ordre alphabétique
   static triParNoms(liste, propriete) {
     liste.sort(function(a, b) {
-      if (a[propriete] < b[propriete]) { 
-        return -1; 
-      }
-      if (a[propriete] > b[propriete]) { 
-        return 1;
-      }
-      return 0;
+      return a[propriete].localeCompare(b[propriete]);
     });
   }
 }
