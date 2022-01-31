@@ -1,6 +1,6 @@
-// Barre de recherche principale
+// Formulaires englobant les champs avancés et les listes (ingrédients, appareils, ustensiles)
 .form-princ {
-    position: relative;
+  position: relative;
   label {
     display: inline;
   }
@@ -29,9 +29,10 @@
 
 // Formulaires de recherche par catégorie
 .form-categ {
-  display: none;
+  // display: none;
+  visibility: hidden;
   position: absolute;
-  top: 15px;
+  top: 20px;
   left: 0;
   width: 667px;
   font-size: 1.125em;
@@ -95,12 +96,20 @@
   }
   &--appa {
     background-color: $clr-btn2;
+    left: 193px;
+    @include lap-max {
+      left: 0;
+    }
     input {
       background-color: $clr-btn2;
     }
   }
   &--uste {
     background-color: $clr-btn3;
+    left: 386px;
+    @include lap-max {
+      left: 0;
+    }
     input {
       background-color: $clr-btn3;
     }

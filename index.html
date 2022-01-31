@@ -38,38 +38,45 @@
                 <nav>
                     <!-- Bouton comportant la recherche en cours -->
                     <div class="header__selec"></div>
-                    <!-- Boutons ouvrant les formulaires de recherche par catégorie -->
+                    <!-- Conteneur de boutons de formulaires de recherche par catégorie -->
                     <div class="header__categ">
+                        <!-- Bouton ouvrant le formulaire d'ingrédients -->
                         <button class="btn btn--ingr" aria-label="Rechercher un ingrédient" aria-haspopup="menu" aria-controls="form-ingr" aria-expanded="false">
                             <span class="btn__cont">Ingrédients</span>
                             <span class="fas fa-chevron-down"></span>
                         </button>
+                        <!-- Formulaire d'ingrédients -->
                         <form id="form-ingr" class="form-categ form-categ--ingr">
                             <label for="rech-ingr"><span class="fas fa-chevron-up"></span></label>
                             <input type="search" id="rech-ingr" name="rech-ingr" placeholder="Recherche un ingrédient" />
                             <ul aria-label="Liste des ingrédients" class="form-categ__liste form-categ--ingr__liste">
                             </ul>
                         </form>
+                        <!-- Bouton ouvrant le formulaire d'appareils -->
                         <button class="btn btn--appa" aria-label="Rechercher un appareil" aria-haspopup="menu" aria-controls="form-appa" aria-expanded="false">
                             <span class="btn__cont">Appareil</span>
                             <span class="fas fa-chevron-down"></span>
                         </button>
+                        <!-- Formulaire d'appareils -->
                         <form id="form-appa" class="form-categ form-categ--appa">
                             <label for="rech-appa"><span class="fas fa-chevron-up"></span></label>
                             <input type="search" id="rech-appa" name="rech-appa" placeholder="Recherche un appareil" />
                             <ul aria-label="Liste des appareils" class="form-categ__liste form-categ--appa__liste">
                             </ul>
                         </form>
+                        <!-- Bouton ouvrant le formulaire d'ustensiles -->
                         <button class="btn btn--uste" aria-label="Rechercher un ustensile" aria-haspopup="menu" aria-controls="form-uste" aria-expanded="false">
                             <span class="btn__cont">Ustenciles</span>
                             <span class="fas fa-chevron-down"></span>
                         </button>
+                        <!-- Formulaire d'ustensiles -->
                         <form id="form-uste" class="form-categ form-categ--uste">
                             <label for="rech-uste"><span class="fas fa-chevron-up"></span></label>
                             <input type="search" id="rech-uste" name="rech-uste" placeholder="Recherche un ustensile" />
                             <ul aria-label="Liste des ustensiles" class="form-categ__liste form-categ--uste__liste">
                             </ul>
                         </form>
+                        <!-- Bloqueur fermant les formulaires -->
                         <div class="bloqueur"></div>
                     </div>
                 </nav>
@@ -77,31 +84,6 @@
 
             <!-- Galerie de plats -->
             <main class="galerie">
-                <!-- <aside class="galerie__mess">
-                    <span>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>
-                    <span class="far fa-times-circle"></span>
-                </aside> -->
-                <!-- <article class="plat">
-                    <img src="https://via.placeholder.com/150/C7BEBE?text=+" alt="" />
-                    <div class="plat-intro">
-                        <h2>Limonade de Coco</h2>
-                        <div>
-                            <span class="plat-intro__icone far fa-clock"></span><span class="plat-intro__duree">10 min</span>
-                        </div>
-                    </div>
-                    <div class="plat-recette">
-                        <ul class="plat-recette__liste">
-                            <li><span class="plat-recette__ingr">Lait de coco: </span><span class="plat-recette__quant">400ml</span></li>
-                            <li><span class="plat-recette__ingr">Jus de citron: </span><span class="plat-recette__quant">2</span></li>
-                            <li><span class="plat-recette__ingr">Crême de coco: </span><span class="plat-recette__quant">4 cuillères</span></li>
-                            <li><span class="plat-recette__ingr">Sucre: </span><span class="plat-recette__quant">20g</span></li>
-                            <li><span class="plat-recette__ingr">Glaçons: </span><span class="plat-recette__quant">2</span></li>
-                        </ul>
-                        <p class="plat-recette__descr">
-                            Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
-                        </p>
-                    </div>
-                </article> -->
             </main>
 
         </div>
