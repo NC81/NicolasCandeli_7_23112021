@@ -125,9 +125,9 @@ export class ChampsAvance {
     champsUstenciles.liste = [];
     // Répartition des ingrédients, appareils et ustensiles dans leurs listes respectives pour chaque recette
     for (let recette of recettes) {
-      MotsCles.creeListe(recette, 'aliments', 'rgb(50, 130, 247)', champsIngredients.liste); /* Crée liste d'ingrédients */
-      MotsCles.creeListe(recette, 'appliance', 'rgb(104, 217, 164)', champsAppareils.liste); /* Crée liste d'appareils */
-      MotsCles.creeListe(recette, 'ustensils', 'rgb(237, 100, 84)', champsUstenciles.liste); /* Crée liste d'ustensiles */
+      MotsCles.creeListe(recette, 'aliments', 'rgb(50, 130, 247)', champsIngredients.liste, 1); /* Crée liste d'ingrédients */
+      MotsCles.creeListe(recette, 'appliance', 'rgb(104, 217, 164)', champsAppareils.liste, 2); /* Crée liste d'appareils */
+      MotsCles.creeListe(recette, 'ustensils', 'rgb(237, 100, 84)', champsUstenciles.liste, 3); /* Crée liste d'ustensiles */
     }
   }
 
